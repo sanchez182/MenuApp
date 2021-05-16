@@ -5,6 +5,7 @@ import './App.scss';
 import About from './pages/About';
 import Page404 from './pages/404';
 import HomePage from './pages/Homepage';
+import MenuComponent from './pages/MenuComponent';
 
 const App: FC = () => {
   return (
@@ -15,6 +16,10 @@ const App: FC = () => {
         </Route>
         <Route path="/about" exact>
           <About />
+        </Route>
+        
+        <Route path="/menu" exact> 
+        <MenuComponent/>
         </Route>
         <Route path="*">
           <Page404 />

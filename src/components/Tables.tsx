@@ -1,6 +1,7 @@
-import { Card, CardActionArea, CardContent, Grid } from '@material-ui/core';
+import { Button, Card, CardActionArea, CardContent, Grid } from '@material-ui/core';
 import DeckIcon from '@material-ui/icons/Deck';
-interface TablesType {
+import { withRouter, Link, RouteComponentProps, NavLink } from "react-router-dom";
+interface TablesType extends RouteComponentProps<any> {
     numberTable: number;
     isAvailable: 'inherit' | 'primary' | 'secondary' | 'action' | 'disabled' | 'error';
 }
@@ -8,7 +9,7 @@ interface TablesType {
 const Tables = ({ numberTable, isAvailable }: TablesType) => {
     return (
         <Grid item xs={4} md={4} >
-            <Card style={{backgroundColor:" #f1f1f196"}}>
+            <Card style={{ backgroundColor: " #f1f1f196" }}>
                 <CardActionArea>
                     <CardContent style={{
                         display: 'flex',
@@ -17,12 +18,19 @@ const Tables = ({ numberTable, isAvailable }: TablesType) => {
                     }}>
                         <DeckIcon fontSize={"large"}
                             color={isAvailable} />
-                        <p 
-                                style = {{
+                        <p
+                            style={{
                                 marginLeft: "16px",
                                 marginTop: "8px"
                             }}
                         > #{numberTable}</p>
+               
+                        <Link to="/menu">
+                            <Button variant="contained" color="secondary">
+                                Secondary
+                            </Button>
+                        </Link>
+                  
                     </CardContent>
                 </CardActionArea>
             </Card>
@@ -30,4 +38,4 @@ const Tables = ({ numberTable, isAvailable }: TablesType) => {
     );
 }
 
-export default Tables;
+export default withRouter(Tables);
