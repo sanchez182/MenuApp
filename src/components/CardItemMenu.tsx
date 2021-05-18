@@ -1,27 +1,21 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import MySvg from './../assets/platillo1.jpg';
+import { Fab, Tooltip } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      maxWidth: 345,
-    },
     media: {
       height: 0,
       paddingTop: '56.25%', // 16:9
@@ -42,7 +36,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function CardItemMenu() {
+interface ICardItemMenu {
+  addPlate: (arg0:number)=> void;
+  cant: number;
+}
+
+export default function CardItemMenu({ addPlate, cant }: ICardItemMenu) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -51,40 +50,35 @@ export default function CardItemMenu() {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card>
       <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
         title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
       />
 
-        <CardMedia className={classes.media}  
+      <CardMedia className={classes.media}
         image={require('../../src/assets/platillo1.jpg').default}
-         title="Paella dish"
-  />
+        title="Paella dish"
+      />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
+          Aca va la descrión grande del platillo
           This impressive paella is a perfect party dish and a fun meal to cook together with your
           guests. Add 1 cup of frozen peas along with the mussels, if you like.
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-     </CardActions>
+      <CardActions disableSpacing style={{justifyContent: "flex-end"}}>
+        <strong  style={{marginRight: "8px"}}> {cant}</strong>
+        <Tooltip title="Agregar plato" aria-label="Add">
+        <Fab size="small" color="primary" onClick={()=>addPlate(1)} aria-label="add">
+          <AddIcon /> 
+        </Fab> 
+        </Tooltip>
+        <Tooltip title="Quitar plato" aria-label="remove">
+        <Fab size="small" color="secondary"  style={{marginLeft: "6px"}} onClick={()=>addPlate(-1)} aria-label="add">
+        <RemoveIcon />
+        </Fab> 
+        </Tooltip>
+      </CardActions>
     </Card>
   );
 }

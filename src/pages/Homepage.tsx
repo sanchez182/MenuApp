@@ -3,7 +3,6 @@ import React, { Fragment, FC } from 'react';
 import { useSelector } from 'react-redux';
 import CropDinIcon from '@material-ui/icons/CropDin';
 import Header from '../components/Header';
-import DeckIcon from '@material-ui/icons/Deck';
 import { translate } from '../config/i18n';
 import { RootState } from '../store';
 import Tables from '../components/Tables';
@@ -12,16 +11,13 @@ const HomePage: FC = () => {
   const { language } = useSelector((state: RootState) => state.lang);
 
   return (
-    <Fragment> 
-      
-      <section className="intro"> 
-        <Grid container className="intro__body">
+        <Grid container >
           <Grid item xs={12} md={12} >
           <Header fixed transparent/>
           </Grid>
           
 
-          <Grid container >
+          <Grid container style={{marginTop: "158px"}} >
             <Grid item xs={6} md={6} >
               <Card style={{backgroundColor:"rgb(128 63 63 / 47%)"}}>
                 <CardActionArea>
@@ -64,17 +60,17 @@ const HomePage: FC = () => {
             <Tables numberTable ={10} isAvailable ="error" />
             <Tables numberTable ={11} isAvailable ="primary" />
             <Tables numberTable ={12} isAvailable ="error" />
+            <Tables numberTable ={12} isAvailable ="error" />
+            <Tables numberTable ={12} isAvailable ="error" />
+            <Tables numberTable ={12} isAvailable ="error" />
+            <Tables numberTable ={12} isAvailable ="error" />
+            <Tables numberTable ={12} isAvailable ="error" />
+            <Tables numberTable ={12} isAvailable ="error" />
+            <Tables numberTable ={12} isAvailable ="error" />
+            <Tables numberTable ={12} isAvailable ="error" />
     </Grid>
         </Grid>
-      </section>
-      {/*   <section className="intro">
-        <div className="intro__overlay"></div>
-        <div className="intro__body">
-          <h1>Menú virtual</h1>
-          <p>{translate('introText', language)}</p>
-        </div>
-      </section> */}
-    </Fragment>
+ 
   );
 }
 

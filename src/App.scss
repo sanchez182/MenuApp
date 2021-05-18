@@ -9,6 +9,14 @@ $dark-color: #000;
 
 $ff-primary: 'Poppins', sans-serif;
 
+html { 
+  background:  url('assets/imgPrincipal.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 html, body, #root {
   height: 100%;
 }
@@ -71,16 +79,6 @@ h1 {
     align-items: center;
   }
 
-  &__brand {
-
-    h1 {
-      font-size: 20px;
-
-      a {
-        color: $text-color;
-      }
-    }
-  }
 
   &__nav {
     display: flex;
@@ -123,26 +121,6 @@ h1 {
       }
     }
 
-    &_menu {
-      display: flex;
-      align-items: center;
-
-      li {
-        margin-left: 20px;
-
-        a {
-          font-weight: 700;
-          font-size: 12px;
-          text-transform: uppercase;
-          color: $text-color;
-
-          &:hover,
-          &.active {
-            color: $primary-color;
-          }
-        }
-      }
-    }
   }
 }
 

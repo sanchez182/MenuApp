@@ -70,7 +70,24 @@ export default function MenuComponent() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <MenuItems/>
+        <MenuItems plate={1} />
+        <MenuItems plate={2}/>
+        <MenuItems plate={3} />
+        <MenuItems plate={4} />
+        <MenuItems plate={5} />
+        <MenuItems plate={6} />
+        <MenuItems plate={6} />
+        <MenuItems plate={6} />
+        <MenuItems plate={6} />
+        <MenuItems plate={6} />
+        <MenuItems plate={6} />
+        <MenuItems plate={6} />
+        <MenuItems plate={6} />
+        <MenuItems plate={6} />
+        <MenuItems plate={6} />
+        <MenuItems plate={6} />
+        <MenuItems plate={6} />
+        <MenuItems plate={6} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two

@@ -19,13 +19,13 @@ const Header: FC<HeaderProps> = ({ fixed, transparent }) => {
 
   let headerClass = 'header';
 
-  if(fixed) {
+ /*  if(fixed) {
     headerClass += ' header--fixed';
   }
 
   if(transparent) {
     headerClass += ' header--transparent';
-  }
+  } */
 
   const handleClickOutside = useCallback((e) => {
     if(showDropdown && e.target.closest('.dropdown') !== dropdownEl.current) {
@@ -47,9 +47,9 @@ const Header: FC<HeaderProps> = ({ fixed, transparent }) => {
   }
 
   return(
-    <header className={headerClass}>
+    <header className={"header header--fixed"}  id="myHeader">
       <div className="container">
-        <Typography variant="h3" component="h3"
+        <Typography variant="h4" component="h4"
             align="center">{translate("textSelectTable",language)}  </Typography>
         <div className="header__nav">
           <div className="header__nav_lang">

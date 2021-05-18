@@ -1,79 +1,69 @@
-import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import LocalDiningIcon from '@material-ui/icons/LocalDining';
-import SendIcon from '@material-ui/icons/Send';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
-import { Checkbox, ListItemSecondaryAction, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CardItemMenu from '../components/CardItemMenu';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      maxWidth: 360,
-      backgroundColor: theme.palette.background.paper,
     },
-    nested: {
-      paddingLeft: theme.spacing(4),
+    heading: {
+      fontSize: theme.typography.pxToRem(15),
+      fontWeight: theme.typography.fontWeightRegular,
     },
   }),
 );
 
-export default function MenuItems() {
+interface MenuItem {
+  plate: number;
+}
+export default function MenuItems({ plate }: MenuItem) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  const [checked, setChecked] = React.useState([1]);
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
+  const [state, setstate] = useState({
+    plateName: "",
+    cant: 0
+  }) 
 
-  const handleToggle = (value: number) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-  };
-
-
-  return (
-    <List
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-      className={classes.root}
-    >
-      <ListItem button>
-        <ListItemIcon>
-          <SendIcon />
-        </ListItemIcon>
-        <ListItemText primary="Platillo 1" />
-      </ListItem>
+  const addPlate=(cant:number)=>{
+    debugger
+    const newValue = state.cant+cant
+    newValue >= 0 && setstate({...state, cant: state.cant+cant})
   
-      <ListItem  button onClick={handleClick}>
-      <ListItemIcon>
-              <LocalDiningIcon />
-            </ListItemIcon>
-        <ListItemText primary="Platillo 2" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit> 
-          <CardItemMenu/>
-      </Collapse>
-    </List>
+  }
+
+const color =  state.cant > 0 ? { backgroundColor: "lightgreen", marginTop: "4px" } : { marginTop: "4px"}
+  return (
+    
+    <div className={classes.root}>
+      <Accordion style={color}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Grid container>
+            <Grid item xs={9}>
+              <Typography className={classes.heading}>Plato {plate} <br />
+                <Typography variant="body2" color="textSecondary" component="p">Una descripcion pequeña...</Typography>
+              </Typography>
+            </Grid>
+            {state.cant > 0 && <Grid item xs={3}>
+              <p>cant: {state.cant}</p>
+            </Grid>}
+
+          </Grid>
+        </AccordionSummary>
+        <AccordionDetails>
+          <CardItemMenu addPlate={addPlate} cant={state.cant}/>
+        </AccordionDetails>
+      </Accordion>
+    </div>
   );
 }
