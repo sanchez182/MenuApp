@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -15,7 +14,7 @@ import { RootState } from '../store';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: '100%',
+      width: '100%'
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
@@ -23,32 +22,26 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
 interface MenuItem {
   plate: IModelMenuItem;
 }
-export default function MenuItems({ plate }: MenuItem) {
+
+export const  MenuItems = ({ plate }: MenuItem)=> {
   const classes = useStyles();
   const dispatch = useDispatch();
-
   const { items } = useSelector((state: RootState) => state.menuItemReducer);
   debugger
 
 
   const addPlate = (cant: number) => {
     const newValue = cant + plate.cant;
-    let itemSelected = items.find((x: IModelMenuItem) => x.idPlate == plate.idPlate)
-    itemSelected && (itemSelected.cant = newValue);
     let indexPlate = items.findIndex((x: IModelMenuItem) => x.idPlate == plate.idPlate)
-    const newState = items;
-    itemSelected && indexPlate && (newState[indexPlate] = itemSelected)
-    
+    items[indexPlate].cant = newValue;
     newValue >= 0 && dispatch(setMenuItems(items));
   }
 
   const color = plate.cant > 0 ? { backgroundColor: "lightgreen", marginTop: "4px" } : { marginTop: "4px" }
   return (
-
     <div className={classes.root}>
       <Accordion style={color}>
         <AccordionSummary
@@ -65,15 +58,16 @@ export default function MenuItems({ plate }: MenuItem) {
 
             </Grid>
             {plate.cant > 0 && <Grid item xs={3}>
-              <p>cant: {plate.cant}</p>
+              <p>Cant: {plate.cant}</p>
             </Grid>}
 
           </Grid>
         </AccordionSummary>
-        <AccordionDetails>
-          <CardItemMenu addPlate={addPlate} cant={plate.cant} description={plate.description} />
+        <AccordionDetails style={{    display: "block"}}>
+          <CardItemMenu addPlate={addPlate} cant={plate.cant} plateName={plate.plateName} description={plate.description} />
         </AccordionDetails>
       </Accordion>
     </div>
   );
 }
+export default MenuItems;

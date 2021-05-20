@@ -6,6 +6,7 @@ import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import SaveIcon from '@material-ui/icons/Save';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import KitchenIcon from '@material-ui/icons/Kitchen';
+import DialogMenu from './DialogMenu';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,15 +41,21 @@ export default function ButtonDial() {
   const classes = useStyles();
   
   const [open, setOpen] = React.useState(false);
+  const [openDialog, setOpenDialog] = React.useState(false);
 
   const handleClose = () => {
     setOpen(false);
   };
 
 
+  const setOpenMenu=()=>{
+    setOpenDialog(!openDialog)
+  }
   const actionEvent=(action: any)=>{
      debugger
-     
+     if(action.name === "foodSeleted"){
+      setOpenDialog(true)
+     }
     setOpen(false);
   }
 
@@ -57,6 +64,7 @@ export default function ButtonDial() {
   };
 
   return (
+    <>
         <SpeedDial
           ariaLabel="SpeedDial example"
           className={classes.speedDial}
@@ -78,5 +86,9 @@ export default function ButtonDial() {
             />
           ))} 
         </SpeedDial>
+        {openDialog &&
+            <DialogMenu setOpenMenu={setOpenMenu} open={openDialog}/>
+        }
+        </>
   );
 }

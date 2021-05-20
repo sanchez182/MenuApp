@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -15,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     media: {
       height: 0,
-      paddingTop: '56.25%', // 16:9
+      paddingTop: '56.25%', // 16:9,
     },
     expand: {
       transform: 'rotate(0deg)',
@@ -37,15 +36,16 @@ interface ICardItemMenu {
   addPlate: (arg0:number)=> void;
   cant: number;
   description: string;
+  plateName: string;
 }
 
-export default function CardItemMenu({ addPlate, cant,description }: ICardItemMenu) {
+const CardItemMenu =({ addPlate, cant,description,plateName }: ICardItemMenu) =>{
   const classes = useStyles();
 
   return (
     <Card>
       <CardHeader
-        title="Shrimp and Chorizo Paella"
+        title={plateName}
       />
 
       <CardMedia className={classes.media}
@@ -73,3 +73,4 @@ export default function CardItemMenu({ addPlate, cant,description }: ICardItemMe
     </Card>
   );
 }
+export default CardItemMenu;
