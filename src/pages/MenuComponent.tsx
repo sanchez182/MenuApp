@@ -5,12 +5,15 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { RootState } from '../store';
 
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import MenuItems from './MenuItems';
 import ButtonDial from '../components/ButtonDial';
+import { useSelector } from 'react-redux';
+import { IModelMenuItem } from '../interfaces/IModelMenuItem';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -54,6 +57,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function MenuComponent() {
   const classes = useStyles();
+  
+  const { items }= useSelector((state: RootState) => state.menuItemReducer);
+  debugger
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -71,24 +77,9 @@ export default function MenuComponent() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <MenuItems plate={1} />
-        <MenuItems plate={2}/>
-        <MenuItems plate={3} />
-        <MenuItems plate={4} />
-        <MenuItems plate={5} />
-        <MenuItems plate={6} />
-        <MenuItems plate={6} />
-        <MenuItems plate={6} />
-        <MenuItems plate={6} />
-        <MenuItems plate={6} />
-        <MenuItems plate={6} />
-        <MenuItems plate={6} />
-        <MenuItems plate={6} />
-        <MenuItems plate={6} />
-        <MenuItems plate={6} />
-        <MenuItems plate={6} />
-        <MenuItems plate={6} />
-        <MenuItems plate={6} />
+        {items.map((item: IModelMenuItem)=>{
+          return <MenuItems plate={item} />
+        })}
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two

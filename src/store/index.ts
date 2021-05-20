@@ -2,9 +2,11 @@
 import { createStore, combineReducers } from 'redux';
 
 import langReducer from './reducers/langReducer';
+import menuItemReducer from './reducers/menuItemsReducer';
 
 const rootReducer = combineReducers({
-  lang: langReducer
+  lang: langReducer,
+  menuItemReducer
 });
 
 const store = createStore(rootReducer);

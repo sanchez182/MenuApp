@@ -7,6 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CardItemMenu from '../components/CardItemMenu';
 import { Grid } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMenuItems } from '../store/actions/menuItemsActions';
+import { IModelMenuItem } from '../interfaces/IModelMenuItem';
+import { RootState } from '../store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,26 +25,30 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface MenuItem {
-  plate: number;
+  plate: IModelMenuItem;
 }
 export default function MenuItems({ plate }: MenuItem) {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const [state, setstate] = useState({
-    plateName: "",
-    cant: 0
-  }) 
+  const { items } = useSelector((state: RootState) => state.menuItemReducer);
+  debugger
 
-  const addPlate=(cant:number)=>{
-    debugger
-    const newValue = state.cant+cant
-    newValue >= 0 && setstate({...state, cant: state.cant+cant})
-  
+
+  const addPlate = (cant: number) => {
+    const newValue = cant + plate.cant;
+    let itemSelected = items.find((x: IModelMenuItem) => x.idPlate == plate.idPlate)
+    itemSelected && (itemSelected.cant = newValue);
+    let indexPlate = items.findIndex((x: IModelMenuItem) => x.idPlate == plate.idPlate)
+    const newState = items;
+    itemSelected && indexPlate && (newState[indexPlate] = itemSelected)
+    
+    newValue >= 0 && dispatch(setMenuItems(items));
   }
 
-const color =  state.cant > 0 ? { backgroundColor: "lightgreen", marginTop: "4px" } : { marginTop: "4px"}
+  const color = plate.cant > 0 ? { backgroundColor: "lightgreen", marginTop: "4px" } : { marginTop: "4px" }
   return (
-    
+
     <div className={classes.root}>
       <Accordion style={color}>
         <AccordionSummary
@@ -50,20 +58,20 @@ const color =  state.cant > 0 ? { backgroundColor: "lightgreen", marginTop: "4px
         >
           <Grid container>
             <Grid item xs={9}>
-              <Typography className={classes.heading}>Plato {plate} <br />
+              <Typography className={classes.heading}>{plate.plateName} <br />
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                Una descripcion pequeña...</Typography>
+                {plate.shortDdescription}</Typography>
 
             </Grid>
-            {state.cant > 0 && <Grid item xs={3}>
-              <p>cant: {state.cant}</p>
+            {plate.cant > 0 && <Grid item xs={3}>
+              <p>cant: {plate.cant}</p>
             </Grid>}
 
           </Grid>
         </AccordionSummary>
         <AccordionDetails>
-          <CardItemMenu addPlate={addPlate} cant={state.cant}/>
+          <CardItemMenu addPlate={addPlate} cant={plate.cant} description={plate.description} />
         </AccordionDetails>
       </Accordion>
     </div>

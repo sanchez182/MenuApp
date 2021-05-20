@@ -9,4 +9,4 @@ interface SetLanguageAction {
   payload: string;
 }
 
-export type LangAction = SetLanguageAction;
+export type ILangActions = SetLanguageAction;

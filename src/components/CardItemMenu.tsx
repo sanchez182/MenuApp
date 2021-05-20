@@ -5,13 +5,10 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Fab, Tooltip } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,15 +36,11 @@ const useStyles = makeStyles((theme: Theme) =>
 interface ICardItemMenu {
   addPlate: (arg0:number)=> void;
   cant: number;
+  description: string;
 }
 
-export default function CardItemMenu({ addPlate, cant }: ICardItemMenu) {
+export default function CardItemMenu({ addPlate, cant,description }: ICardItemMenu) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   return (
     <Card>
@@ -61,9 +54,7 @@ export default function CardItemMenu({ addPlate, cant }: ICardItemMenu) {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          Aca va la descrión grande del platillo
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          {description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing style={{justifyContent: "flex-end"}}>

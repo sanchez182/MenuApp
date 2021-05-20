@@ -1,7 +1,7 @@
-import { LangAction, SET_LANGUAGE } from '../types';
+import { ILangActions,SET_LANGUAGE } from './actionsInterfaces/ILangActions';
 
 // Set language
-export const setLanguage = (lang: string): LangAction => {
+export const setLanguage = (lang: string): ILangActions => {
   localStorage.setItem('language', lang);
   return {
     type: SET_LANGUAGE,

@@ -1,5 +1,5 @@
 import { Card, CardActionArea, CardContent, Grid, Typography } from '@material-ui/core';
-import React, { Fragment, FC } from 'react';
+import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import CropDinIcon from '@material-ui/icons/CropDin';
 import Header from '../components/Header';

@@ -11,7 +11,7 @@ const App: FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact>
+        <Route path="/MenuApp" exact>
           <HomePage />
         </Route>
         <Route path="/about" exact>
