@@ -10,6 +10,7 @@ import LocalDiningIcon from '@material-ui/icons/LocalDining';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import MenuItems from './MenuItems';
+import ButtonDial from '../components/ButtonDial';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -95,6 +96,7 @@ export default function MenuComponent() {
       <TabPanel value={value} index={2}>
         Item Three
       </TabPanel>
+      <ButtonDial/>
     </div>
   );
 }

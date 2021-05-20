@@ -51,8 +51,10 @@ const color =  state.cant > 0 ? { backgroundColor: "lightgreen", marginTop: "4px
           <Grid container>
             <Grid item xs={9}>
               <Typography className={classes.heading}>Plato {plate} <br />
-                <Typography variant="body2" color="textSecondary" component="p">Una descripcion pequeña...</Typography>
               </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Una descripcion pequeña...</Typography>
+
             </Grid>
             {state.cant > 0 && <Grid item xs={3}>
               <p>cant: {state.cant}</p>
