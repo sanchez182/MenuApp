@@ -20,7 +20,7 @@ const model2: IModelMenuItem = {
 }
 
 const initialState: MenuStage = {
-          items: [model,model2]
+          items: [model]
 }    
 
 const menuItemsReducer = (state = initialState, action: IMenuItemsActions) => {
