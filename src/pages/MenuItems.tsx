@@ -8,7 +8,6 @@ import CardItemMenu from '../components/CardItemMenu';
 import { Grid } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMenuItems } from '../store/actions/menuItemsActions';
-import { IModelMenuItem } from '../interfaces/IModelMenuItem';
 import { RootState } from '../store';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,24 +22,23 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 interface MenuItem {
-  plate: IModelMenuItem;
+  item: any;
+  itemType: "food" | "drink";
+  itemName: string;
 }
 
-export const  MenuItems = ({ plate }: MenuItem)=> {
+export const  MenuItems = ({ item,itemType,itemName }: MenuItem)=> {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { items } = useSelector((state: RootState) => state.menuItemReducer);
-  debugger
-
-
   const addPlate = (cant: number) => {
-    const newValue = cant + plate.cant;
-    let indexPlate = items.findIndex((x: IModelMenuItem) => x.idPlate == plate.idPlate)
-    items[indexPlate].cant = newValue;
+    const newValue = cant + item.cant;
+    let indexPlate = items[itemType].findIndex((x: any) => x.id === item.id )
+    items[itemType][indexPlate].cant = newValue;
     newValue >= 0 && dispatch(setMenuItems(items));
   }
 
-  const color = plate.cant > 0 ? { backgroundColor: "lightgreen", marginTop: "4px" } : { marginTop: "4px" }
+  const color = item.cant > 0 ? { backgroundColor: "lightgreen", marginTop: "4px" } : { marginTop: "4px" }
   return (
     <div className={classes.root}>
       <Accordion style={color}>
@@ -51,20 +49,21 @@ export const  MenuItems = ({ plate }: MenuItem)=> {
         >
           <Grid container>
             <Grid item xs={9}>
-              <Typography className={classes.heading}>{plate.plateName} <br />
+              <Typography className={classes.heading}>{itemName} <br />
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                {plate.shortDdescription}</Typography>
+                {item.shortDescription}</Typography>
 
             </Grid>
-            {plate.cant > 0 && <Grid item xs={3}>
-              <p>Cant: {plate.cant}</p>
+            {item.cant > 0 && <Grid item xs={3}>
+              <p>Cant: {item.cant}</p>
             </Grid>}
 
           </Grid>
         </AccordionSummary>
         <AccordionDetails style={{    display: "block"}}>
-          <CardItemMenu addPlate={addPlate} cant={plate.cant} plateName={plate.plateName} description={plate.description} />
+          <CardItemMenu addItem={addPlate} cant={item.cant} image={item.image}
+           itemName={item[itemName]} description={item.description} />
         </AccordionDetails>
       </Accordion>
     </div>

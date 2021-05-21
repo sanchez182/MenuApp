@@ -7,6 +7,9 @@ import SaveIcon from '@material-ui/icons/Save';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import KitchenIcon from '@material-ui/icons/Kitchen';
 import DialogMenu from './DialogMenu';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
+import { IModelDrinks, IModelFood } from '../interfaces/IModelMenuItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const actions = [
   { icon: <PanToolIcon />, name: 'hand', id:'hand', action: "Mesero" },
-  { icon: <SaveIcon />, name: 'Save', id:'Save', action: "Pedir comida" },
+  { icon: <SaveIcon />, name: 'orderFood', id:'orderFood', action: "Pedir comida" },
   { icon: <KitchenIcon />, name: 'foodSeleted', id:'foodSeleted', action: "Items elegidos" },
 
   
@@ -39,7 +42,10 @@ const actions = [
 
 export default function ButtonDial() {
   const classes = useStyles();
-  
+  const { items }= useSelector((state: RootState) => state.menuItemReducer);
+
+  const renderOrderFood = items.food.filter((x:IModelFood)=> x.cant > 0).length > 0  || 
+  items.drink.filter((x:IModelDrinks)=> x.cant > 0).length > 0  ? true : false
   const [open, setOpen] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
 
@@ -52,7 +58,6 @@ export default function ButtonDial() {
     setOpenDialog(!openDialog)
   }
   const actionEvent=(action: any)=>{
-     debugger
      if(action.name === "foodSeleted"){
       setOpenDialog(true)
      }
@@ -62,7 +67,7 @@ export default function ButtonDial() {
   const handleOpen = () => {
     setOpen(true);
   };
-
+  
   return (
     <>
         <SpeedDial
@@ -75,6 +80,7 @@ export default function ButtonDial() {
           direction={"up"}
         >
            {actions.map((action) => (
+             action.name === "orderFood" && renderOrderFood === false ? null : 
             <SpeedDialAction
               key={action.name}
               classes={classes}

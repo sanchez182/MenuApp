@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef, FC } from 'react';
+import { useCallback, useState, useEffect, useRef, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../store';
@@ -16,16 +16,6 @@ const Header: FC<HeaderProps> = ({ fixed, transparent }) => {
   const dispatch = useDispatch();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownEl = useRef<HTMLUListElement>(null);
-
-  let headerClass = 'header';
-
- /*  if(fixed) {
-    headerClass += ' header--fixed';
-  }
-
-  if(transparent) {
-    headerClass += ' header--transparent';
-  } */
 
   const handleClickOutside = useCallback((e) => {
     if(showDropdown && e.target.closest('.dropdown') !== dropdownEl.current) {

@@ -9,15 +9,16 @@ interface TablesType extends RouteComponentProps<any> {
 const Tables = ({ numberTable, isAvailable }: TablesType) => {
     return (
         <Grid item xs={4} md={4} >
-            
-            <Link to="/menu">
-            <Card style={{ backgroundColor: " #f1f1f196" }}>
+
+            <Card style={{ backgroundColor: " #f1f1f196" }} >
                 <CardActionArea>
                     <CardContent style={{
                         display: 'flex',
                         alignItems: 'center',
                         flexWrap: 'wrap',
                     }}>
+
+                        <Link to={isAvailable === "error" ? '#' : "/menu"}  >
                             <DeckIcon fontSize={"large"}
                                 color={isAvailable} />
                             <p
@@ -26,10 +27,11 @@ const Tables = ({ numberTable, isAvailable }: TablesType) => {
                                     marginTop: "8px"
                                 }}
                             > #{numberTable}</p>
+
+                        </Link>
                     </CardContent>
                 </CardActionArea>
             </Card>
-</Link>
         </Grid>
     );
 }

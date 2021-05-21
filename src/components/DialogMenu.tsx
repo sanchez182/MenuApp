@@ -10,7 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { IModelMenuItem } from '../interfaces/IModelMenuItem';
+import { IModelDrinks, IModelFood } from '../interfaces/IModelMenuItem';
 import { Card, CardContent, CardHeader } from '@material-ui/core';
 
 const styles = (theme: Theme) =>
@@ -66,14 +66,16 @@ interface IDialogMenu {
 }
 const DialogMenu = ({open,setOpenMenu}: IDialogMenu)=> { 
     const { items }= useSelector((state: RootState) => state.menuItemReducer);
-    const renderItems = items.filter( (x:IModelMenuItem)=> x.cant > 0)
+    const renderFood = items.food.filter( (x:IModelFood)=> x.cant > 0)
+    const renderDrink = items.drink.filter( (x:IModelDrinks)=> x.cant > 0)
   return (
       <Dialog onClose={setOpenMenu} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={setOpenMenu}>
           Listado de productos seleccionados
         </DialogTitle>
-        <DialogContent dividers>
-            { renderItems.length >0 ? renderItems.map((item:IModelMenuItem)=>{
+        <DialogContent dividers> 
+        <h4>Platillos</h4>
+         { renderFood.length >0 ? renderFood.map((item:IModelFood)=>{
                   return <Card>
                   <CardHeader
                     title={`${item.plateName}   Cant.${item.cant}`}
@@ -84,10 +86,32 @@ const DialogMenu = ({open,setOpenMenu}: IDialogMenu)=> {
                     </Typography>
                   </CardContent>
                 </Card>
-            }):
+            }) :
             <Typography variant="body2" color="textSecondary" component="p">
-                        Aún no has seleccionado para pedir.
-            </Typography>
+            Aún no has seleccionado ningún platillo para pedir.
+          </Typography>
+          
+          }
+<br/>
+<br/>
+<br/>
+          <h4>Bebidas</h4>
+            { renderDrink.length >0 ? renderDrink.map((item:IModelDrinks)=>{
+              return <Card>
+              <CardHeader
+                title={`${item.drinkName}   Cant.${item.cant}`}
+              />
+              <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                         {item.description}
+                </Typography>
+              </CardContent>
+            </Card>
+        }) 
+            :
+            <Typography variant="body2" color="textSecondary" component="p">
+            Aún no has seleccionado ninguna bebida para pedir.
+          </Typography>
             }
           
         </DialogContent>

@@ -33,23 +33,24 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface ICardItemMenu {
-  addPlate: (arg0:number)=> void;
+  addItem: (arg0:number)=> void;
   cant: number;
   description: string;
-  plateName: string;
+  itemName: string;
+  image: string;
 }
 
-const CardItemMenu =({ addPlate, cant,description,plateName }: ICardItemMenu) =>{
+const CardItemMenu =({ addItem, cant,description,itemName,image }: ICardItemMenu) =>{
   const classes = useStyles();
 
   return (
     <Card>
       <CardHeader
-        title={plateName}
+        title={itemName}
       />
 
       <CardMedia className={classes.media}
-        image={require('../../src/assets/platillo1.jpg').default}
+        image={require( `../../src/assets/${image}`).default}
         title="Paella dish"
       />
       <CardContent>
@@ -60,12 +61,12 @@ const CardItemMenu =({ addPlate, cant,description,plateName }: ICardItemMenu) =>
       <CardActions disableSpacing style={{justifyContent: "flex-end"}}>
         <strong  style={{marginRight: "8px"}}> {cant}</strong>
         <Tooltip title="Agregar plato" aria-label="Add">
-        <Fab size="small" color="primary" onClick={()=>addPlate(1)} aria-label="add">
+        <Fab size="small" color="primary" onClick={()=>addItem(1)} aria-label="add">
           <AddIcon /> 
         </Fab> 
         </Tooltip>
         <Tooltip title="Quitar plato" aria-label="remove">
-        <Fab size="small" color="secondary"  style={{marginLeft: "6px"}} onClick={()=>addPlate(-1)} aria-label="add">
+        <Fab size="small" color="secondary"  style={{marginLeft: "6px"}} onClick={()=>addItem(-1)} aria-label="add">
         <RemoveIcon />
         </Fab> 
         </Tooltip>
