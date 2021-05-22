@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         formControl: {
             margin: theme.spacing(1),
-            minWidth: "86%",
+            minWidth: "95%",
         },
         chips: {
             display: 'flex',
@@ -36,16 +36,14 @@ interface ISelectItem {
     idItemType: string;
     itemName: string;
     placeHolder: string;
-    disabled: boolean;
 }
 
-export default function MultiSelect({ setItemValue, renderItems, items, idItemType, itemName, placeHolder,disabled }: ISelectItem) {
+export default function MultiSelect({ setItemValue, renderItems, items, idItemType, itemName, placeHolder }: ISelectItem) {
     const classes = useStyles();
     return (
         <FormControl className={classes.formControl}>
             <InputLabel id="demo-mutiple-chip-label">{placeHolder}</InputLabel>
             <Select
-                 disabled={disabled}
                 labelId="demo-mutiple-chip-label"
                 id="demo-mutiple-chip"
                 multiple
