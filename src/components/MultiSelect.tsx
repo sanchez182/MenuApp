@@ -8,13 +8,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
-import { ITimeFood } from '../interfaces/IModelMenuItem';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         formControl: {
             margin: theme.spacing(1),
-            minWidth: "95%",
+            minWidth: "86%",
         },
         chips: {
             display: 'flex',
@@ -31,23 +30,22 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface ISelectItem {
-    renderItems: ITimeFood[];
+    renderItems: any[];
     setItemValue: (arg0: any) => void;
     items: any[];
     idItemType: string;
     itemName: string;
     placeHolder: string;
+    disabled: boolean;
 }
 
-export default function MultiSelect({ setItemValue, renderItems, items, idItemType, itemName, placeHolder }: ISelectItem) {
-
+export default function MultiSelect({ setItemValue, renderItems, items, idItemType, itemName, placeHolder,disabled }: ISelectItem) {
     const classes = useStyles();
-
-    debugger
     return (
         <FormControl className={classes.formControl}>
             <InputLabel id="demo-mutiple-chip-label">{placeHolder}</InputLabel>
             <Select
+                 disabled={disabled}
                 labelId="demo-mutiple-chip-label"
                 id="demo-mutiple-chip"
                 multiple

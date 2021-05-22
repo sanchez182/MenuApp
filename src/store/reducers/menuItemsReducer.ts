@@ -13,18 +13,17 @@ const model: IModelFood = {
   idTimeFood: 1
 }
 
-const model2: IModelFood = {
-  plateName: "Plato vegetariano",
+
+const model7: IModelFood = {
+  plateName: "Plato vegetariano desayuno",
   idFoodType: 2,
   description: "descripcion larga vegetariano asd asda sda sdasd",
   shortDescription: "descripcion corta",
   image: "platillo1.jpg",
   cant: 0,
   id: 2,
-  idTimeFood: 2
+  idTimeFood: 1
 }
-
-
 
 const model3: IModelFood = {
   plateName: "Carne o cualquier cosa",
@@ -51,7 +50,7 @@ const model4: IModelFood = {
 
 
 const model5: IModelFood = {
-  plateName: "Plato vegetariano2",
+  plateName: "Plato vegetariano almuerzo",
   idFoodType: 2,
   description: "descripcion larga vegetariano2 asd asda sda sdasd",
   shortDescription: "descripcion corta",
@@ -113,7 +112,7 @@ const drink4 : IModelDrinks ={
 }
 
  const modelMenu : IModelMenuItem = {
-  food :  [model,model2,model3,model4,model5,model6],
+  food :  [model,model3,model4,model5,model6,model7],
   drink :  [drink1,drink2,drink3,drink4],
  }
 

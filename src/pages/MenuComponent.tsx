@@ -13,8 +13,8 @@ import MenuItems from './MenuItems';
 import ButtonDial from '../components/ButtonDial';
 import SelectItem from '../components/SelectItem';
 import { useSelector } from 'react-redux';
-import { IModelDrinks, IModelFood, ITimeFood } from '../interfaces/IModelMenuItem';
-import { Grid } from '@material-ui/core';
+import { IFoodType, IModelDrinks, IModelFood, ITimeFood } from '../interfaces/IModelMenuItem';
+import { Checkbox, Grid } from '@material-ui/core';
 import { drinkTypeList, foodTypeList, timeFoodTypeList } from './temporalData';
 import MultiSelect from '../components/MultiSelect';
 
@@ -60,33 +60,40 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function MenuComponent() {
   const classes = useStyles();
-
-
   const { items } = useSelector((state: RootState) => state.menuItemReducer);
-
-
   const [value, setValue] = React.useState(0);
   const [drinkType, setDrinkType] = React.useState(null);
-  const [foodType, setFoodType] = React.useState(null);
- // const [foodTime, setFoodTime] = React.useState(null);
-
+  const [foodType, setFoodType] = React.useState<IFoodType[]>([]);
+  const [foodTypeDisabled, setFoodTypeDisabled] = React.useState<boolean>(false);
   const [foodTime, setFoodTime] = React.useState<ITimeFood[]>([]);
-/*   const [selected, setSelected] = React.useState([
-    { id: 1, label: "Oliver Hansen" },
-    { id: 2, label: "Van Henry" }
-  ]); */
+  const [foodTimeDisabled, setFoodTimeDisabled] = React.useState<boolean>(false);
+
   const setDrink = (event: any) => {
     setDrinkType(event.target.value)
   }
 
-  const setFood = (event: any) => {
-    setFoodType(event.target.value)
-  }
 
   const setTimeFood = (event: React.ChangeEvent<{ value: unknown }>) => {
     debugger
     setFoodTime(event.target.value as ITimeFood[]);
-    
+
+  };
+
+  const setFood = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setFoodType(event.target.value as IFoodType[]);
+
+  };
+
+  const setDisabledFoodType = () => {
+    setFoodTypeDisabled(!foodTypeDisabled)
+    setFoodType([] as IFoodType[]);
+
+  };
+
+  const setDisabledFoodTime = () => {
+    setFoodTimeDisabled(!foodTimeDisabled)
+    setFoodTime([] as ITimeFood[]);
+
   };
 
 
@@ -94,11 +101,52 @@ export default function MenuComponent() {
     setValue(newValue);
   };
 
-  const renderFoodByFilters=()=>{
- /*    foodType ?   items.food.filter((x: IModelFood) => x.idFoodType === foodType).map((item: IModelFood) => {
-      return <MenuItems item={item} itemType="food" itemName={item.plateName} key={item.id} />
+  const renderFoodByFilters = () => {
+    if (foodTime.length > 0 && foodType.length > 0) {
 
-    }) */
+      let newFoodList: IModelFood[] = []
+      let newFoodList2: IModelFood[] = []
+
+      items.food.forEach(item => {
+        foodTime.forEach(time => {
+          if(item.idTimeFood === time.idTimeFood)
+          newFoodList.push(item)
+       });
+     });
+
+     newFoodList.forEach(item => {
+      foodType.forEach(time => {
+        if(item.idFoodType === time.idFoodType)
+        newFoodList2.push(item)
+     });
+   });
+
+      return  newFoodList2.map((item: IModelFood) => {
+        return <MenuItems item={item} itemType="food" itemName={item.plateName} key={item.id} />
+      })
+
+    }else 
+    if (foodTime.length > 0) {
+      return foodTime.map((foodTime) => {
+        return items.food.filter((x: IModelFood) => x.idTimeFood === foodTime.idTimeFood).map((item: IModelFood) => {
+          return <MenuItems item={item} itemType="food" itemName={item.plateName} key={item.id} />
+        })
+      })
+    }else
+
+    if (foodType.length > 0) {
+      return foodType.map((foodType) => {
+        return items.food.filter((x: IModelFood) => x.idFoodType === foodType.idFoodType).map((item: IModelFood) => {
+          return <MenuItems item={item} itemType="food" itemName={item.plateName} key={item.id} />
+        })
+      })
+    }else{
+       return items.food.map((item: IModelFood) => {
+      return <MenuItems item={item} itemType="food" itemName={item.plateName} key={item.id} />
+    })
+    }
+ 
+
   }
 
   return (
@@ -113,34 +161,41 @@ export default function MenuComponent() {
       </AppBar>
       <TabPanel value={value} index={0}>
         <Grid container justify="flex-end">
-          
-          <MultiSelect renderItems={foodTime}
-            items={timeFoodTypeList}
-            setItemValue={setTimeFood}
-            idItemType="idTimeFood"
-            itemName="timeFoodName"
-            placeHolder="Filtrar por tiempo de comida"/>
 
-     {/*      <SelectItem idItem={foodType}
-            items={foodTypeList}
-            setItemValue={setTimeFood}
-            idItemType="idFoodType"
-            itemName="foodName"
-            placeHolder="Filtrar por tipo de comida"
-          /> */}
-    {/*       <SelectItem idItem={foodTime}
-            items={timeFoodTypeList}
-            setItemValue={setFood}
-            idItemType="idFoodTime"
-            itemName="timeFoodName"
-            placeHolder="Filtrar por tiempo de comida"
-          /> */}
+          <Grid item xs={12}>
+            <MultiSelect renderItems={foodTime}
+              items={timeFoodTypeList}
+              setItemValue={setTimeFood}
+              idItemType="idTimeFood"
+              disabled={foodTimeDisabled}
+              itemName="timeFoodName"
+              placeHolder="Filtrar por tiempo de comida" />
+            <Checkbox
+              checked={!foodTimeDisabled}
+              onChange={setDisabledFoodTime}
+              inputProps={{ 'aria-label': 'primary checkbox' }}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <MultiSelect renderItems={foodType}
+              items={foodTypeList}
+              disabled={foodTypeDisabled}
+              setItemValue={setFood}
+              idItemType="idFoodType"
+              itemName="foodName"
+              placeHolder="Filtrar por tipo de comida" />
+            <Checkbox
+              checked={!foodTypeDisabled}
+              onChange={setDisabledFoodType}
+              inputProps={{ 'aria-label': 'primary checkbox' }}
+            />
+          </Grid>
+
+          {renderFoodByFilters()}
+    
         </Grid>
-        { items.food.filter((x: IModelFood) => x.idFoodType === foodType).map((item: IModelFood) => {
-                  return <MenuItems item={item} itemType="food" itemName={item.plateName} key={item.id} />
 
-         }) 
-        }
 
       </TabPanel>
       <TabPanel value={value} index={1}>
