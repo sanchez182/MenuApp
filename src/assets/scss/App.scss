@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
+@import './_variables.scss';
+
+@import 'Header';
+@import 'Layout';
+@import 'SideBar';
 
 /* Variables */
 $primary-color: #ff5964;
@@ -11,7 +16,7 @@ $dark-color: #000;
 $ff-primary: 'Poppins', sans-serif;
 
 html { 
-  background:  url('assets/imgPrincipal.jpg') no-repeat center center fixed; 
+  background:  url('../img/imgPrincipal.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -128,7 +133,7 @@ h1 {
 /* Intro */
 .intro {
   height: 100%;
-  background-image: url('assets/imgPrincipal.jpg');
+  background-image: url('../img/imgPrincipal.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;

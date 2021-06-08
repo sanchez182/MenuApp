@@ -1,21 +1,21 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { translate } from '../config/i18n';
 import { RootState } from '../store';
+import {withTranslation} from "react-i18next"
 
-const Page404: FC = () => {
+const Page404: FC = ({t}: any) => {
   const { language } = useSelector((state: RootState) => state.lang);
 
   return(
     <div className="page-404">
       <div className="container">
         <h1>404</h1>
-        <p>{translate('pageDoesNotExist', language)}</p>
-        <p><Link to="/">{translate('returnToHomepage', language)}</Link></p>
+        <p>{t('pageDoesNotExist', language)}</p>
+        <p><Link to="/">{t('returnToHomepage', language)}</Link></p>
       </div>
     </div>
   );
 }
 
-export default Page404;
+export default withTranslation() (Page404);

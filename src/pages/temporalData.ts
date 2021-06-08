@@ -53,8 +53,12 @@ const drink1 : IDrinkType = {
     timeFoodName: "Cena"
   }
 
+  const timeFood4 : ITimeFood = {
+    idTimeFood:4,
+    timeFoodName: "Postre"
+  }
   
   export const drinkTypeList : IDrinkType[] = [drink1,drink2,drink3,drink4]; 
   export const foodTypeList : IFoodType[] = [food1,food2,food3,food4]; 
-  export const timeFoodTypeList : ITimeFood[] = [timeFood1,timeFood2,timeFood3]; 
+  export const timeFoodTypeList : ITimeFood[] = [timeFood1,timeFood2,timeFood3,timeFood4]; 
  

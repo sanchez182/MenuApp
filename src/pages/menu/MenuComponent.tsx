@@ -5,18 +5,18 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import { RootState } from '../store';
+import { RootState } from '../../store';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import MenuItems from './MenuItems';
-import ButtonDial from '../components/ButtonDial';
-import SelectItem from '../components/SelectItem';
+import ButtonDial from '../../components/ButtonDial';
+import SelectItem from '../../components/SelectItem';
 import { useSelector } from 'react-redux';
-import { IFoodType, IModelDrinks, IModelFood, ITimeFood } from '../interfaces/IModelMenuItem';
+import { IFoodType, IModelDrinks, IModelFood, ITimeFood } from '../../interfaces/IModelMenuItem';
 import { Grid } from '@material-ui/core';
-import { drinkTypeList, foodTypeList, timeFoodTypeList } from './temporalData';
-import MultiSelect from '../components/MultiSelect';
+import { drinkTypeList, foodTypeList, timeFoodTypeList } from '../temporalData';
+import MultiSelect from '../../components/MultiSelect';
 
 interface TabPanelProps {
   children?: React.ReactNode;

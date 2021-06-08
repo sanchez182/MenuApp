@@ -1,31 +1,23 @@
-import React, { FC } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import './App.scss';
-
-import About from './pages/About';
-import Page404 from './pages/404';
-import HomePage from './pages/Homepage';
-import MenuComponent from './pages/MenuComponent';
+import  { FC } from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import {I18nextProvider} from 'react-i18next';
+import i18n from './config/i18n';
+import { AppRouter } from './router/AppRouter';
+import store from './store';
+import './assets/scss/App.scss';
 
 const App: FC = () => {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/MenuApp" exact>
-          <HomePage />
-        </Route>
-        <Route path="/about" exact>
-          <About />
-        </Route>
+    <I18nextProvider i18n={i18n}>
+    <Provider store={ store }>
+      <Router>
         
-        <Route path="/menu" exact> 
-        <MenuComponent/>
-        </Route>
-        <Route path="*">
-          <Page404 />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+        <AppRouter />
+      </Router>
+    </Provider>
+    </I18nextProvider>
+
   );
 }
 

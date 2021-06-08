@@ -50,7 +50,7 @@ const CardItemMenu =({ addItem, cant,description,itemName,image }: ICardItemMenu
       />
 
       <CardMedia className={classes.media}
-        image={require( `../../src/assets/${image}`).default}
+        image={require( `../../src/assets/img/${image}`).default}
         title="Paella dish"
       />
       <CardContent>

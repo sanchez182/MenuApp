@@ -2,14 +2,15 @@ import { Card, CardActionArea, CardContent, Grid, Typography } from '@material-u
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import CropDinIcon from '@material-ui/icons/CropDin';
-import Header from '../components/Header';
-import { translate } from '../config/i18n';
-import { RootState } from '../store';
-import Tables from '../components/Tables';
+import Header from '../../components/Header'; 
+import {withTranslation} from "react-i18next"
 
-const HomePage: FC = () => {
+import { RootState } from '../../store';
+import Tables from '../../components/Tables';
+
+const HomePage: FC = ({t}:any) => {
   const { language } = useSelector((state: RootState) => state.lang);
-
+console.log("caca")
   return (
         <Grid container >
           <Grid item xs={12} md={12} >
@@ -26,7 +27,7 @@ const HomePage: FC = () => {
                       color="textSecondary" component="p"
                       align="center">
                       <CropDinIcon color="error" />
-                      <p>{translate("busy",language)}</p>
+                      <p>{t("busy",language)}</p>
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -39,7 +40,7 @@ const HomePage: FC = () => {
                     <Typography variant="body2" color="textSecondary" component="p"
                       align="center">
                       <CropDinIcon color="primary" />
-                      <p>{translate("available",language)}</p>  </Typography>
+                      <p>{t("available",language)}</p>  </Typography>
                   </CardContent>
                 </CardActionArea>
               </Card>
@@ -74,4 +75,4 @@ const HomePage: FC = () => {
   );
 }
 
-export default HomePage;
+export default withTranslation() (HomePage);

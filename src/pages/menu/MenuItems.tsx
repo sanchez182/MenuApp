@@ -4,11 +4,11 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import CardItemMenu from '../components/CardItemMenu';
+import CardItemMenu from '../../components/CardItemMenu';
 import { Grid } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { setMenuItems } from '../store/actions/menuItemsActions';
-import { RootState } from '../store';
+import { setMenuItems } from '../../store/actions/menuItemsActions';
+import { RootState } from '../../store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

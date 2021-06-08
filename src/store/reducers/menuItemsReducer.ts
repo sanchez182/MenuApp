@@ -39,7 +39,7 @@ const model3: IModelFood = {
 
 const model4: IModelFood = {
   plateName: "Algún postre",
-  idFoodType:3,
+  idFoodType:4,
   description: "descripcion larga del postre asd asda sda sdasd",
   shortDescription: "descripcion corta",
   image: "platillo1.jpg",
