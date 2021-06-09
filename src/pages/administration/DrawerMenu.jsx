@@ -1,10 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
+import {  useTheme,  } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -15,16 +12,15 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import { openCloseDrawer } from '../../store/actions/drawerActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Home } from '@material-ui/icons';
+import ListItemMenu from '../../components/ListItemMenu';
 
 
 
-export const DrawerMenu = ()=> {
+export const DrawerMenu = ({routes})=> {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { open } = useSelector((state) => state.drawerState);
@@ -37,7 +33,29 @@ export const DrawerMenu = ()=> {
   const handleDrawerOpen = () => {
     dispatch(openCloseDrawer(true));
   };
-  
+
+
+  const renderListItem =()=>{
+    return routes && routes.map((route)=>{
+      const {showInMenu, name} = route;
+
+      if(showInMenu){
+        if(route.children && route.children.length <= 0){
+          return null;
+        }else{
+          return ( 
+            <ListItemMenu
+              key={name}
+              route={route}
+              open={open}
+            />
+          )
+        }
+      }else{
+        return null;
+      }
+    })
+  }
   return (
     <Drawer
       variant="permanent"
@@ -45,11 +63,11 @@ export const DrawerMenu = ()=> {
       classes={{paper: isOpen }}
     >
       <div className="toolbar justify-content-between">
-        <Link to="/Home">
+        <Link to="/">
         <ListItem button >
             <ListItemIcon>
                <Home /></ListItemIcon>
-            <ListItemText primary={"Homa"} />
+            <ListItemText primary={"Home"} />
           </ListItem>
         </Link>
         <IconButton color="inherit" data-testid="close-button" onClick={handleDrawerClose}>
@@ -57,13 +75,8 @@ export const DrawerMenu = ()=> {
         </IconButton>
       </div>
       <Divider />
-      <List onClick={handleDrawerOpen} >
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+      <List className="general-list" onClick={handleDrawerOpen} >
+        { renderListItem(routes)}
       </List>
     </Drawer>
   );

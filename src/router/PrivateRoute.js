@@ -9,14 +9,6 @@ export const PrivateRoute = ({
     ...rest
 }) => {
     return (
-/*         <Route { ...rest }
-            component={ (props) => (
-                ( isAuthenticated )
-                    ? ( <Component { ...props } /> )
-                    : ( <Redirect to="/dashboardLogin" /> )
-            )}
-        
-        /> */
         <Route {...rest} render={props => (
             ( isAuthenticated ) ?
                 <Component {...props} />

@@ -131,7 +131,7 @@ export default function MenuComponent() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar  position='fixed'>
         <Tabs centered value={value} onChange={handleChange} aria-label="simple tabs example">
 
           <Tab label="Platillos" icon={<LocalDiningIcon />} {...a11yProps(0)} />

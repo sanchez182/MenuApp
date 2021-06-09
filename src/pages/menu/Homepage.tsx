@@ -1,21 +1,18 @@
 import { Card, CardActionArea, CardContent, Grid, Typography } from '@material-ui/core';
-import React, { FC } from 'react';
+import  { FC } from 'react';
 import { useSelector } from 'react-redux';
 import CropDinIcon from '@material-ui/icons/CropDin';
 import Header from '../../components/Header'; 
 import {withTranslation} from "react-i18next"
-
 import { RootState } from '../../store';
 import Tables from '../../components/Tables';
+import StartAppBarPublic from './StartAppBarPublic';
 
 const HomePage: FC = ({t}:any) => {
   const { language } = useSelector((state: RootState) => state.lang);
-console.log("caca")
   return (
         <Grid container >
-          <Grid item xs={12} md={12} >
-          <Header fixed transparent/>
-          </Grid>
+         <StartAppBarPublic/>
           
 
           <Grid container style={{marginTop: "158px"}} >

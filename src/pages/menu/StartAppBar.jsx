@@ -11,6 +11,7 @@ import i18n from '../../config/i18n';
 import languageOptions from '../../config/languageOptions';
  /* import { logout } from '../../logout'; */
 import { openCloseDrawer } from '../../store/actions/drawerActions';
+import SpecialDialLenguage from './SpecialDialLenguage';
 //Actions
  
 const StartAppBar = (props) => {
@@ -72,31 +73,7 @@ const StartAppBar = (props) => {
                     </Grid>
                     <Grid item xs={4} md={6} className="column-info">
                         <List className="menu">
-                                <ListItem>
-                                    <SpeedDial
-                                        data-testid='speedDialId'
-                                        id='speedDialId'
-                                        ariaLabel="translate-selection"
-                                        icon={<SpeedDialIcon icon={<LanguageIcon />} openIcon={<CloseIcon />} />}
-                                        onClose={closeLanguage}
-                                        onOpen={openLanguage}
-                                        open={openLang}
-                                        direction="down"
-                                    >
-                                        {languageOptions.map(action => (
-                                            <SpeedDialAction
-                                                data-testid='actionSpeed'
-                                                className={action.value === lang.value ? 'active' : ''}
-                                                key={action.value}
-                                                icon={action.shortLabel}
-                                                tooltipOpen
-                                                tooltipTitle={t(action.label)}
-                                                onClick={() => changeLang(action)}
-                                            />
-                                        ))}
-                                    </SpeedDial>
-                                </ListItem>
-                
+                            <SpecialDialLenguage />
                             <ListItem>
                                 <IconButton id="iconButton"  onClick={handleClick} color="inherit">
                                     <UserIcon />

@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 // Icons
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 // Components
@@ -21,9 +21,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const ListItemMenu = ({ route: { path, name, children, component, iconName }, open, location, t }) => {
+const ListItemMenu = ({ route: { path, name, children, component, iconName }, open, location }) => {
     const [openNested, setOpenNested] = useState(false);
     const classes = useStyles();
+    const { t } = useTranslation(); 
 
     const handleClick = () => {
         setOpenNested(!openNested);
@@ -83,7 +84,6 @@ const ListItemMenu = ({ route: { path, name, children, component, iconName }, op
     const drawRoutes = () => {
         const childInMenu = children && children.filter((child) => child.showInMenu === true);
         const activeClass = checkActive(path) ? 'activeLink' : '';
-
         if (component && (!childInMenu || childInMenu.length === 0)) {
             return renderListItem(activeClass)
         }
@@ -113,3 +113,5 @@ const ListItemMenu = ({ route: { path, name, children, component, iconName }, op
     };
     return drawRoutes();
 };
+
+export default  withRouter(ListItemMenu)
