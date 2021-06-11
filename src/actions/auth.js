@@ -7,7 +7,7 @@ import { checkingFinish, setAuthLogin ,logout} from '../store/actions/authAction
 export const startLogin = ( email, password ) => {
     return async( dispatch ) => {
         const resp = await fetchSinToken( 'auth', { email, password }, 'POST' );
-        const body = await resp.json();
+        const body = resp.data;
         if( body.ok ) {
             localStorage.setItem('token', body.token );
             localStorage.setItem('token-init-date', new Date().getTime() );
@@ -27,7 +27,7 @@ export const startLogin = ( email, password ) => {
 export const startChecking = () => {
     return async(dispatch) => {
         const resp = await fetchConToken( 'auth/renew' );
-        const body = await resp.json();
+        const body = resp.data;
         if( body.ok ) {
             localStorage.setItem('token', body.token );
             localStorage.setItem('token-init-date', new Date().getTime() );
@@ -68,7 +68,6 @@ export const startRegister = ( email, password, name ) => {
  
 export const startLogout = () => {
     return ( dispatch ) => {
-
         localStorage.clear();
         dispatch( logout() );
     }

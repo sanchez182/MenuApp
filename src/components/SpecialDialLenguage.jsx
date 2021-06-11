@@ -5,8 +5,8 @@ import { Language as LanguageIcon, Close as CloseIcon } from '@material-ui/icons
 import { SpeedDial, SpeedDialIcon, SpeedDialAction } from '@material-ui/lab';
 //Language
 import { withTranslation } from 'react-i18next';
-import i18n from '../../config/i18n';
-import languageOptions from '../../config/languageOptions';
+import i18n from '../config/i18n';
+import languageOptions from '../config/languageOptions';
 
 
 //TODO agregar el nombre del restaurante en el header

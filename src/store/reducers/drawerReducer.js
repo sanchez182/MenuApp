@@ -2,7 +2,7 @@
 export const OPEN_CLOSE = 'OPEN_CLOSE';
 
 const initialState = {
-    open: false
+    open: true
 };
 
 export default function draweReducer(stateProps, action) {

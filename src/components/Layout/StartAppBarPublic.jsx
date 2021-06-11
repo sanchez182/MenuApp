@@ -2,14 +2,11 @@
 import { Toolbar, AppBar, Typography, Grid, List } from '@material-ui/core';
 //Language
 import { withTranslation } from 'react-i18next';
-import i18n from '../../config/i18n';
-import SpecialDialLenguage from './SpecialDialLenguage';
+import SpecialDialLenguage from '../../components/SpecialDialLenguage';
 
 
 //TODO agregar el nombre del restaurante en el header
 const StartAppBarPublic = (props) => {
-    const { t } = props;
-
     return (
         <AppBar elevation={0} position='fixed' className={`appBar`}>
             <Toolbar>

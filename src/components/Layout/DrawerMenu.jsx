@@ -1,12 +1,8 @@
-import React from 'react';
-import clsx from 'clsx';
 import {  useTheme,  } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
@@ -16,7 +12,7 @@ import { openCloseDrawer } from '../../store/actions/drawerActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Home } from '@material-ui/icons';
-import ListItemMenu from '../../components/ListItemMenu';
+import ListItemMenu from '../ListItemMenu';
 
 
 
@@ -63,7 +59,7 @@ export const DrawerMenu = ({routes})=> {
       classes={{paper: isOpen }}
     >
       <div className="toolbar justify-content-between">
-        <Link to="/">
+        <Link to="/MenuApp">
         <ListItem button >
             <ListItemIcon>
                <Home /></ListItemIcon>

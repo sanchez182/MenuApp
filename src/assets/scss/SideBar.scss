@@ -12,7 +12,7 @@
 .drawer {
     width: $width-sidebar-open !important;
     flex-shrink: 0 !important;
-    white-space: nowrap !important;
+    /* white-space: nowrap !important; */
 
     .MuiDrawer-paper {
         position: absolute;

@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Route, Redirect } from 'react-router-dom';
@@ -12,17 +11,9 @@ export const PublicRoute = ({
 }) => {
 
     return (
-  /*       <Route { ...rest }
-            component={ (props) => (
-                ( isAuthenticated )
-                    ? ( <Redirect to="/" /> )
-                    : ( <Component { ...props } /> )
-            )}
-        
-        /> */
         <Route {...rest} render={props => (
             ( isAuthenticated ) && restricted ?
-                <Redirect to="/dashboarMenu" />
+                <Redirect to="/MenuApp/dashboarMenu" />
             : <Component {...props} />
         )} />
     )

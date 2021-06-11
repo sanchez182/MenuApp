@@ -1,23 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from "react-router-dom";
-//Components
 import { Toolbar, AppBar, IconButton, Typography, Grid, List, ListItem, Menu, MenuItem } from '@material-ui/core';
-import { Menu as MenuIcon, Language as LanguageIcon, Close as CloseIcon, AccountCircle as UserIcon } from '@material-ui/icons';
-import { SpeedDial, SpeedDialIcon, SpeedDialAction } from '@material-ui/lab';
-//Language
+import { Menu as MenuIcon, AccountCircle as UserIcon } from '@material-ui/icons';
 import { withTranslation } from 'react-i18next';
-import i18n from '../../config/i18n';
-import languageOptions from '../../config/languageOptions';
  /* import { logout } from '../../logout'; */
 import { openCloseDrawer } from '../../store/actions/drawerActions';
-import SpecialDialLenguage from './SpecialDialLenguage';
-//Actions
+import SpecialDialLenguage from '../SpecialDialLenguage';
+import { logout } from '../../store/actions/authActions';
  
 const StartAppBar = (props) => {
     const {  t } = props;
-    const [lang, setLang] = useState(languageOptions[0]);
-    const [openLang, setOpenLang] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     
@@ -37,21 +29,9 @@ const StartAppBar = (props) => {
     };
     const logoutMenu = () => {
         handleClose();
-     //   logout();
+        dispatch(logout());
     }
 
-    const closeLanguage = () => {
-        setOpenLang(false);
-    }
-    const openLanguage = () => {
-        setOpenLang(true);
-    }
-
-    const changeLang = async (language) => {
-        setLang(language);
-        i18n.changeLanguage(language.value);
-        closeLanguage();
-    };
     return (
         <AppBar elevation={0} position='fixed' className={`appBar ${(open ? 'appBarShift' : '')}`}>
             <Toolbar>

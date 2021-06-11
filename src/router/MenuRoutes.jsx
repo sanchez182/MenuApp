@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import DashboardMenu from "../pages/administration/DashboardMenu"
-import StartAppBar from "../pages/menu/StartAppBar"
+import StartAppBar from "../components/Layout/StartAppBar"
 import { PrivateRoute } from "./PrivateRoute"
-import DrawerMenu from '../pages/administration/DrawerMenu';
+import DrawerMenu from '../components/Layout/DrawerMenu';
 import { routesList } from "./routesList"
-
-
 
 let newRoutes = []
 
 const recursiveRoutes = (routesList, routeName) => {
     routesList.some((element) => {
+        let data = false
         if (element.name === routeName) {
             element.showInMenu = true
             newRoutes.push(element)
@@ -45,7 +44,7 @@ export const RenderPrivateRoutes = ({ screens }) => {
 
     useEffect(() => {
         setRoutes(routes(screens))
-    }, [])
+    }, [screens])
 
     return (
         
@@ -56,7 +55,7 @@ export const RenderPrivateRoutes = ({ screens }) => {
         <main className={open ? "contentOpen" : "content"}   >
             <PrivateRoute
                 exact
-                path={"/dashboarMenu"}
+                path={"/MenuApp/dashboarMenu"}
                 component={DashboardMenu}
                 isAuthenticated={true}
             />

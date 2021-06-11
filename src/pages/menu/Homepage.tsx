@@ -2,11 +2,10 @@ import { Card, CardActionArea, CardContent, Grid, Typography } from '@material-u
 import  { FC } from 'react';
 import { useSelector } from 'react-redux';
 import CropDinIcon from '@material-ui/icons/CropDin';
-import Header from '../../components/Header'; 
 import {withTranslation} from "react-i18next"
 import { RootState } from '../../store';
 import Tables from '../../components/Tables';
-import StartAppBarPublic from './StartAppBarPublic';
+import StartAppBarPublic from '../../components/Layout/StartAppBarPublic'; 
 
 const HomePage: FC = ({t}:any) => {
   const { language } = useSelector((state: RootState) => state.lang);

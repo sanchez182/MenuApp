@@ -7,7 +7,8 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export interface IPayloadAuth {
      uid: any,
      name: String | null,
-     checking: boolean
+     checking: boolean,
+     wasDasborad: boolean
 }
 
 interface SetAuthAction {

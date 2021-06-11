@@ -6,12 +6,16 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import langReducer from './reducers/langReducer';
 import menuItemReducer from './reducers/menuItemsReducer';
 import draweReducer from './reducers/drawerReducer';
+import alertComponentReducer from './reducers/alertComponentReducer';
+import requestReducer from './reducers/requestReducer';
 
 const rootReducer = combineReducers({
   lang: langReducer,
   auth: authReducer,
   drawerState: draweReducer,
-  menuItemReducer
+  menuItemReducer,
+  openMessageAlert:alertComponentReducer,
+  requestReducer
 });
 
 const middleware = [thunk]

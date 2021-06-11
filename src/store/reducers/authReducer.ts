@@ -5,7 +5,8 @@ import { IAuthActions,IPayloadAuth, SET_AUTH_LOGIN,CHECKING_FINISH,AUTH_LOGOUT }
 const initialState: IPayloadAuth = {
      checking: true,
      uid: null,
-     name: null
+     name: null,
+     wasDasborad: false
 }
 
 export const authReducer = ( state = initialState, action : IAuthActions ) => {
@@ -25,7 +26,8 @@ export const authReducer = ( state = initialState, action : IAuthActions ) => {
 
         case AUTH_LOGOUT:
             return {
-                checking: false
+                checking: false,
+                wasDasborad: true
             }
  
 
