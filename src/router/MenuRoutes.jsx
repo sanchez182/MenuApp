@@ -9,8 +9,8 @@ import { routesList } from "./routesList"
 let newRoutes = []
 
 const recursiveRoutes = (routesList, routeName) => {
+    debugger
     routesList.some((element) => {
-        let data = false
         if (element.name === routeName) {
             element.showInMenu = true
             newRoutes.push(element)
@@ -55,7 +55,7 @@ export const RenderPrivateRoutes = ({ screens }) => {
         <main className={open ? "contentOpen" : "content"}   >
             <PrivateRoute
                 exact
-                path={"/MenuApp/dashboarMenu"}
+                path={"/dashboarMenu"}
                 component={DashboardMenu}
                 isAuthenticated={true}
             />
@@ -69,7 +69,7 @@ export const RenderPrivateRoutes = ({ screens }) => {
                         isAuthenticated={true}
                     />
                 })
-            }
+            } 
         </main>
         </>
     )

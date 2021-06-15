@@ -9,7 +9,7 @@ export const routesList = [
     {
         isPrivate: true,
         exact: true,
-        name: 'dashboarMenu', path: '/MenuApp/dashboarMenu',
+        name: 'dashboarMenu', path: '/dashboarMenu',
         iconName: <Tune />,
         showInMenu: true,
         component: DashboardMenu ,
@@ -17,11 +17,11 @@ export const routesList = [
         children:
             [
                 {
-                    name: 'addPlate', iconName: <Tune />, path: '/MenuApp/addPlate', showInMenu: false, level: 2,
+                    name: 'addPlate', iconName: <Tune />, path: '/addPlate', showInMenu: false, level: 2,
                     isPrivate: true, exact: true, component: AddPlate
                 },
                 {
-                    name: 'addDrink', iconName: <Tune />, path: '/MenuApp/addDrink', showInMenu: false, level: 2,
+                    name: 'addDrink', iconName: <Tune />, path: '/addDrink', showInMenu: false, level: 2,
                     isPrivate: true, exact: true, component: AddDrink
                 }
             ]

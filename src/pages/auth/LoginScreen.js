@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import './login.css';
 import LoadingButton from '../../components/LoadingButton';
 
-export const LoginScreen = () => {
+const LoginScreen = () => {
 
     const dispatch = useDispatch();
     const { loadingRequest } = useSelector(state => state.requestReducer);
@@ -83,3 +83,5 @@ export const LoginScreen = () => {
         </div>
     )
 }
+
+export default LoginScreen

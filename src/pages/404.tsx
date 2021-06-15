@@ -12,7 +12,7 @@ const Page404: FC = ({t}: any) => {
       <div className="container">
         <h1>404</h1>
         <p>{t('pageDoesNotExist', language)}</p>
-        <p><Link to="/MenuApp">{t('returnToHomepage', language)}</Link></p>
+        <p><Link to="/">{t('returnToHomepage', language)}</Link></p>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -51,15 +50,7 @@ function a11yProps(index: any) {
   };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
 export default function MenuComponent() {
-  const classes = useStyles();
   const { items } = useSelector((state: RootState) => state.menuItemReducer);
   const [value, setValue] = React.useState(0);
   const [drinkType, setDrinkType] = React.useState(null);
@@ -130,7 +121,7 @@ export default function MenuComponent() {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={"imgFond"}>
       <AppBar  position='fixed'>
         <Tabs centered value={value} onChange={handleChange} aria-label="simple tabs example">
 
@@ -140,8 +131,9 @@ export default function MenuComponent() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Grid container justify="flex-end">
-          <MultiSelect renderItems={foodTime}
+        <Grid container justify="flex-end" style={{marginTop: "48px"}}>
+          <div style={{backgroundColor: "white", width: "100%"}}>
+                <MultiSelect renderItems={foodTime}
             items={timeFoodTypeList}
             setItemValue={setTimeFood}
             idItemType="idTimeFood"
@@ -154,6 +146,8 @@ export default function MenuComponent() {
             idItemType="idFoodType"
             itemName="foodName"
             placeHolder="Filtrar por tipo de comida" />
+          </div>
+      
 
           {renderFoodByFilters()}
         </Grid>

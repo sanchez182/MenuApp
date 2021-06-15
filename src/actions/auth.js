@@ -1,4 +1,4 @@
-import { fetchSinToken, fetchConToken } from '../helpers/fetch';
+import { fetchSinToken, fetchConToken, fetchRenew } from '../helpers/fetch';
 import Swal from 'sweetalert2';
 import { checkingFinish, setAuthLogin ,logout} from '../store/actions/authActions';
 
@@ -26,8 +26,9 @@ export const startLogin = ( email, password ) => {
 }
 export const startChecking = () => {
     return async(dispatch) => {
-        const resp = await fetchConToken( 'auth/renew' );
-        const body = resp.data;
+        const resp = await fetchRenew( 'auth/renew' );
+    /*     const body = resp.data; */
+        const body = await resp.json();
         if( body.ok ) {
             localStorage.setItem('token', body.token );
             localStorage.setItem('token-init-date', new Date().getTime() );

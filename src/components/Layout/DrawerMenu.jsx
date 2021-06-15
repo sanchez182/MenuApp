@@ -59,7 +59,7 @@ export const DrawerMenu = ({routes})=> {
       classes={{paper: isOpen }}
     >
       <div className="toolbar justify-content-between">
-        <Link to="/MenuApp">
+        <Link to="/">
         <ListItem button >
             <ListItemIcon>
                <Home /></ListItemIcon>

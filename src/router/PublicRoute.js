@@ -9,17 +9,18 @@ export const PublicRoute = ({
     component: Component,
     ...rest
 }) => {
-
+debugger
     return (
-        <Route {...rest} render={props => (
-            ( isAuthenticated ) && restricted ?
-                <Redirect to="/MenuApp/dashboarMenu" />
-            : <Component {...props} />
+        <Route {...rest}  render={props => (
+        /*     ( isAuthenticated ) && restricted ?
+                <Redirect to="/" />
+            : */
+             <Component {...props} />
         )} />
     )
 }
 
-PublicRoute.propTypes = {
+/* PublicRoute.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
     component: PropTypes.func.isRequired
-}
+} */

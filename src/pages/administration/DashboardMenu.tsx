@@ -1,10 +1,9 @@
-import { Grid } from '@material-ui/core';
-import { FC } from 'react';
+import { Grid } from '@material-ui/core'; 
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../store';
 
-const DashboardMenu: FC = () => {
+const DashboardMenu = () => {
 /*   const { language } = useSelector((state: RootState) => state.lang);
  */
   return (

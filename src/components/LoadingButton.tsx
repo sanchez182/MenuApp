@@ -55,7 +55,6 @@ export default function LoadingButton({isLoading,textButton,type,handleSubmit,ic
     [classes.buttonSuccess]: success,
   }); 
   */
-debugger
   return (
     <div className={classes.root}>
  

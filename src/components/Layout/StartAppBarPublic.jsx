@@ -4,7 +4,6 @@ import { Toolbar, AppBar, Typography, Grid, List } from '@material-ui/core';
 import { withTranslation } from 'react-i18next';
 import SpecialDialLenguage from '../../components/SpecialDialLenguage';
 
-
 //TODO agregar el nombre del restaurante en el header
 const StartAppBarPublic = (props) => {
     return (

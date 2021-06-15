@@ -1,6 +1,7 @@
 import axios from 'axios'; 
 import i18next from 'i18next';
 import store from '../store';
+import { checkingFinish } from '../store/actions/authActions';
 import { setOpenMessageAlert } from '../store/actions/messageAlertActions';
 import { apiCallError, apiCallStart, apiCallSuccess } from '../store/actions/requestActions'; 
 
@@ -27,29 +28,30 @@ export const errorHandler = (error) => {
         switch (error.response?.status.toString()) {
             case '400':
                 //'Bad Request';
-                error.message = error.response?.data.message ? error.response?.data.message : error.response?.data.errors[0]
+                error.msg = error.response?.data.msg ? error.response?.data.msg : error.response?.data.errors[0]
                  dispatch(apiCallError());
-                dispatch(setOpenMessageAlert({ show: true, message: error.message, severity: 'error' }));
+                dispatch(setOpenMessageAlert({ show: true, message: error.msg, severity: 'error' }));
                 break;
             case '401':
-                error.message = 'Unauthorized';
+                error.msg = 'Unauthorized';
                 dispatch(apiCallError());
-                dispatch(setOpenMessageAlert({ show: true, message: error.message, severity: 'error' }));
+                dispatch(checkingFinish());
+               // dispatch(setOpenMessageAlert({ show: true, message: error.msg, severity: 'error' }));
                 break;
             case '404':
-                error.message = 'Not Found, Record not found for modification';
+                error.msg = 'Not Found, Record not found for modification';
                 dispatch(apiCallError());
-                dispatch(setOpenMessageAlert({ show: true, message: error.message, severity: 'warning' }));
+                dispatch(setOpenMessageAlert({ show: true, message: error.msg, severity: 'warning' }));
                 break;
             case '500':
-                error.message = i18next.t('messages.InternalServerError')
+                error.msg = i18next.t('messages.InternalServerError')
                 dispatch(apiCallError());
-               dispatch(setOpenMessageAlert({ show: true, message: error.message, severity: 'error' }));
+               dispatch(setOpenMessageAlert({ show: true, message: error.msg, severity: 'error' }));
                 break;
             default:
                 dispatch(apiCallError());
-                error.message = i18next.t('messages.InternalServerError.')
-                dispatch(setOpenMessageAlert({ show: true, message: error.message, severity: 'error' }));
+                error.msg = i18next.t('messages.InternalServerError.')
+                dispatch(setOpenMessageAlert({ show: true, message: error.msg, severity: 'error' }));
                 break;
         }
     }

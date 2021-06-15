@@ -11,13 +11,13 @@ const App: FC = () => {
   return (
     <I18nextProvider i18n={i18n}>
     <Provider store={ store }>
-      <Router>
-        
-        <AppRouter />
-      </Router>
+    <Router basename={process.env.PUBLIC_URL}>
+        <AppRouter />    
+    </Router>
+
     </Provider>
     </I18nextProvider>
-
+ 
   );
 }
 

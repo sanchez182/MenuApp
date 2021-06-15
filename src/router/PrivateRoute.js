@@ -8,12 +8,22 @@ export const PrivateRoute = ({
     component: Component,
     ...rest
 }) => {
+    debugger
     return (
-        <Route {...rest} render={props => (
+        <Route { ...rest }
+        component={ (props) => (
+            ( isAuthenticated )
+                ? ( <Component { ...props } /> )
+                : ( <Redirect to="/dashboardLogin" /> )
+        )}
+    
+    />
+
+     /*    <Route {...rest} render={props => (
             ( isAuthenticated ) ?
                 <Component {...props} />
             : <Redirect to="/dashboardLogin" />
-        )} />
+        )} /> */
     )
 }
 
