@@ -27,7 +27,7 @@ export const AppRouter = () => {
 
     if (wasDasborad) {
         window.location.pathname = '/MenuApp/dashboardLogin'
-        return <p>Redirigiendo espere un momento por favor...</p>
+        return <p>Redirigiendo espere un momento por favor....</p>
     }
 
     return (

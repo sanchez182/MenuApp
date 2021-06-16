@@ -35,7 +35,7 @@ export const errorHandler = (error) => {
             case '401':
                 error.msg = 'Unauthorized';
                 dispatch(apiCallError());
-                dispatch(checkingFinish());
+              //  dispatch(checkingFinish());
                // dispatch(setOpenMessageAlert({ show: true, message: error.msg, severity: 'error' }));
                 break;
             case '404':
