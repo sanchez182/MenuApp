@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect }  from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -15,8 +15,8 @@ import { useSelector } from 'react-redux';
 import { IFoodType, IModelDrinks, IModelFood, ITimeFood } from '../../interfaces/IModelMenuItem';
 import { Grid } from '@material-ui/core';
 import { drinkTypeList, foodTypeList, timeFoodTypeList } from '../temporalData';
-import MultiSelect from '../../components/MultiSelect';
-
+import MultiSelect from '../../components/MultiSelect'; 
+import { SocketContext } from '../../context/SocketContext';
 interface TabPanelProps {
   children?: React.ReactNode;
   index: any;
@@ -51,11 +51,23 @@ function a11yProps(index: any) {
 }
 
 export default function MenuComponent() {
+  //TODO: por param llega el numero de mesa
   const { items } = useSelector((state: RootState) => state.menuItemReducer);
   const [value, setValue] = React.useState(0);
   const [drinkType, setDrinkType] = React.useState(null);
   const [foodType, setFoodType] = React.useState<IFoodType[]>([]);
   const [foodTime, setFoodTime] = React.useState<ITimeFood[]>([]);
+  const { socket } = useContext( SocketContext );
+ 
+  useEffect(() => {
+    // TODO: emitir la mesa que se aparta para mostrarlo en el lado del administrador
+    socket.emit( 'seleted-table', {
+      tableNumer: 1, // aca cambiar por el numer de mesa seleccionada
+        idRestaurant: "60cac604d575df447881cbaf"
+    });
+
+    // TODO: hacer el dispatch de el mensaje... 
+  }, [socket])
 
   const setDrink = (event: any) => {
     setDrinkType(event.target.value)

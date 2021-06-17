@@ -83,7 +83,6 @@ export default function ButtonDial() {
              action.name === "orderFood" && renderOrderFood === false ? null : 
             <SpeedDialAction
               key={action.name}
-              classes={classes}
               icon={action.icon}
               id={action.id}      
               tooltipTitle={action.action}

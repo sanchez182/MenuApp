@@ -34,6 +34,7 @@ export default function SelectItem({ setItemValue, idItem, items, idItemType, it
         labelId="demo-simple-select-helper-label"
         id="demo-simple-select-helper"
         value={idItem}
+        key={itemName}
         onChange={setItemValue}
       >
         <MenuItem value="">

@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types';
 
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 
 export const PublicRoute = ({
@@ -9,12 +8,8 @@ export const PublicRoute = ({
     component: Component,
     ...rest
 }) => {
-debugger
     return (
         <Route {...rest}  render={props => (
-        /*     ( isAuthenticated ) && restricted ?
-                <Redirect to="/" />
-            : */
              <Component {...props} />
         )} />
     )

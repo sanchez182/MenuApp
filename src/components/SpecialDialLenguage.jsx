@@ -41,11 +41,11 @@ const SpecialDialLenguage = (props) => {
                 open={openLang}
                 direction="down"
             >
-                {languageOptions.map(action => (
+                {languageOptions.map((action,index) => (
                     <SpeedDialAction
                         data-testid='actionSpeed'
                         className={action.value === lang.value ? 'active' : ''}
-                        key={action.value}
+                        key={index}
                         icon={action.shortLabel}
                         tooltipOpen
                         tooltipTitle={t(action.label)}

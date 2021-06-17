@@ -13,6 +13,9 @@ const TablesHome: FC = () => {
   const { language } = useSelector((state: RootState) => state.lang);
   const { t } = useTranslation();
   let { id }: any = useParams();
+
+
+
   return (
         <Grid container className={"imgFond"}>
           

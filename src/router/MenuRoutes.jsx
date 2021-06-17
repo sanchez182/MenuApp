@@ -8,8 +8,7 @@ import { routesList } from "./routesList"
 
 let newRoutes = []
 
-const recursiveRoutes = (routesList, routeName) => {
-    debugger
+const recursiveRoutes = (routesList, routeName) => { 
     routesList.some((element) => {
         if (element.name === routeName) {
             element.showInMenu = true
@@ -27,6 +26,7 @@ const recursiveRoutes = (routesList, routeName) => {
                 return true;
             }
         }
+        return null;
     })
 }
 
