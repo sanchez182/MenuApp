@@ -8,20 +8,20 @@ export const SocketContext = createContext();
 export const SocketProvider = ({ children }) => {
 
     const { socket, online, conectarSocket, desconectarSocket } = useSocket('http://localhost:4000');
-    const { uid } = useSelector(state => state.auth);
-
+/*     const { uid } = useSelector(state => state.auth);
+ */
     useEffect(() => {
-        if ( uid ) {
+      /*   if ( uid ) { */
             conectarSocket();
-        }
-    }, [ uid, conectarSocket ]);
+     /*    } */
+    }, [  conectarSocket ]);
 
-    useEffect(() => {
+ /*    useEffect(() => {
         if ( !uid ) {
             desconectarSocket();
         }
     }, [ uid, desconectarSocket ]);
-
+ */
 
     useEffect(() => {
         

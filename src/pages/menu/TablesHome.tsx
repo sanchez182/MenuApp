@@ -5,8 +5,7 @@ import CropDinIcon from '@material-ui/icons/CropDin';
 import { RootState } from '../../store';
 import Tables from '../../components/Tables';
 import StartAppBarPublic from '../../components/Layout/StartAppBarPublic'; 
-import { Redirect, useParams, withRouter } from 'react-router-dom';
-
+import {  useParams, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next'
 
 const TablesHome: FC = () => {
@@ -14,12 +13,8 @@ const TablesHome: FC = () => {
   const { t } = useTranslation();
   let { id }: any = useParams();
 
-
-
   return (
-        <Grid container className={"imgFond"}>
-          
-    {  id  &&   <Redirect to="/dashboardLogin" /> }
+        <Grid container className={"imgFond"}> 
          <StartAppBarPublic/>
           
 
