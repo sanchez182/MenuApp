@@ -10,7 +10,6 @@ const HomePage: FC = () => {
   let { id }: any = useParams(); //este id viene por param en la url principal
   const dispatch = useDispatch()
   const { name } = useSelector((state: RootState) => state.restaurantData);
-debugger
   useEffect(() => {
     //traer la data del restaurante
     dispatch(getRestaurantData("60cac604d575df447881cbaf")) //este id viene por param en la url principal

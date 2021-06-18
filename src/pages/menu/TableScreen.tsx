@@ -30,8 +30,8 @@ const TableScreen = ({ setSelectedTable }: TablesScreen) => {
                                 <Typography variant="body2"
                                     color="textSecondary" component="p"
                                     align="center">
-                                    <CropDinIcon color="error" />
-                                    <p>{t("busy", language)}</p>
+                                    <CropDinIcon color="error" /><br/>
+                                   {t("busy", language)}
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
@@ -43,8 +43,8 @@ const TableScreen = ({ setSelectedTable }: TablesScreen) => {
                             <CardContent>
                                 <Typography variant="body2" color="textSecondary" component="p"
                                     align="center">
-                                    <CropDinIcon color="primary" />
-                                    <p>{t("available", language)}</p>  </Typography>
+                                        <CropDinIcon color="primary" /> <br/>
+                                        {t("available", language)}</Typography>
                             </CardContent>
                         </CardActionArea>
                     </Card>

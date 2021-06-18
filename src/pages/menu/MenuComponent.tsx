@@ -11,12 +11,13 @@ import LocalBarIcon from '@material-ui/icons/LocalBar';
 import MenuItems from './MenuItems';
 import ButtonDial from '../../components/ButtonDial';
 import SelectItem from '../../components/SelectItem';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { IFoodType, IModelDrinks, IModelFood, ITimeFood } from '../../interfaces/IModelMenuItem';
 import { Grid } from '@material-ui/core';
 import { drinkTypeList, foodTypeList, timeFoodTypeList } from '../temporalData';
 import MultiSelect from '../../components/MultiSelect';
 import { SocketContext } from '../../context/SocketContext';
+import { Card } from '@material-ui/core';
 
 //#region  styles
 interface TabPanelProps {
@@ -54,7 +55,7 @@ function a11yProps(index: any) {
 //#endregion
 
 
-interface IMenuProps  {
+interface IMenuProps {
   selectedTable: String
 }
 
@@ -69,7 +70,7 @@ export default function MenuComponent({ selectedTable }: IMenuProps) {
   const { socket } = useContext(SocketContext);
 
   useEffect(() => {
-    // TODO: emitir la mesa que se aparta para mostrarlo en el lado del administrador
+    // TODO: emitir la mesa que se aparta para mostrarlo en el lado del administrador y a los otros clientes
     socket.emit('selected-table', {
       tableNumer: selectedTable, // mesa seleccionada
       idRestaurant: _id,
@@ -150,25 +151,23 @@ export default function MenuComponent({ selectedTable }: IMenuProps) {
           <Tab label="Ofertas/Combos" icon={<FastfoodIcon />} {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <Grid container justify="flex-end" style={{ marginTop: "48px" }}>
-          <div style={{ backgroundColor: "white", width: "100%" }}>
-            <MultiSelect renderItems={foodTime}
-              items={timeFoodTypeList}
-              setItemValue={setTimeFood}
-              idItemType="idTimeFood"
-              itemName="timeFoodName"
-              placeHolder="Filtrar por tiempo de comida" />
+      <TabPanel value={value} index={0} >
+        <Grid container justify="flex-end" style={{ marginTop: "48px" }} >
+            <Card  style={{ width: "100%",  marginTop: "14px" }}> 
+                <MultiSelect renderItems={foodTime}
+                  items={timeFoodTypeList}
+                  setItemValue={setTimeFood}
+                  idItemType="idTimeFood"
+                  itemName="timeFoodName"
+                  placeHolder="Filtrar por tiempo de comida" />
 
-            <MultiSelect renderItems={foodType}
-              items={foodTypeList}
-              setItemValue={setFood}
-              idItemType="idFoodType"
-              itemName="foodName"
-              placeHolder="Filtrar por tipo de comida" />
-          </div>
-
-
+                <MultiSelect renderItems={foodType}
+                  items={foodTypeList}
+                  setItemValue={setFood}
+                  idItemType="idFoodType"
+                  itemName="foodName"
+                  placeHolder="Filtrar por tipo de comida" /> 
+            </Card> 
           {renderFoodByFilters()}
         </Grid>
       </TabPanel>

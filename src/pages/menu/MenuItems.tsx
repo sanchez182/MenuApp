@@ -49,14 +49,14 @@ export const  MenuItems = ({ item,itemType,itemName }: MenuItem)=> {
         >
           <Grid container>
             <Grid item xs={9}>
-              <Typography className={classes.heading}>{itemName} <br />
+              <Typography className={classes.heading}>{itemName}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography variant="body2" color="textSecondary" >
                 {item.shortDescription}</Typography>
 
             </Grid>
             {item.cant > 0 && <Grid item xs={3}>
-              <p>Cant: {item.cant}</p>
+              <span>Cant: {item.cant}</span>
             </Grid>}
 
           </Grid>

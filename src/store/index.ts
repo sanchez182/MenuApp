@@ -6,7 +6,6 @@ import langReducer from './reducers/langReducer';
 import menuItemReducer from './reducers/menuItemsReducer'; 
 import alertComponentReducer from './reducers/alertComponentReducer';
 import requestReducer from './reducers/requestReducer';
-import restaurantTablesReducer from './reducers/restaurantTablesReducer';
 import restaurantReducer from './reducers/restaurantReducer ';
 
 const rootReducer = combineReducers({
@@ -14,7 +13,6 @@ const rootReducer = combineReducers({
   menuItemReducer,
   openMessageAlert:alertComponentReducer,
   requestReducer,
-  restaurantTables:restaurantTablesReducer,
   restaurantData: restaurantReducer
 });
 

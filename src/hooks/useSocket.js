@@ -10,7 +10,7 @@ export const useSocket = ( serverPath ) => {
 
     const conectarSocket = useCallback( () => {
   
-        debugger
+        console.log("entra a conectarse una vez mas")
         const socketTemp = io.connect( serverPath, { 
             transports: ['websocket'],
             autoConnect: true,

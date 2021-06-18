@@ -14,7 +14,7 @@ export interface State extends SnackbarOrigin {
   open: boolean;
 }
 
-export const AlertComponent = (props: any) => {
+export const AlertComponent = () => {
   const { t } = useTranslation();
   const { show, severity, message, duration } = useSelector((state: RootState) => state.openMessageAlert);
  

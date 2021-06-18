@@ -9,9 +9,9 @@ export const SocketProvider = ({ children }) => {
     const { socket, online, conectarSocket, desconectarSocket } = useSocket('http://localhost:4000');
     const { _id } = useSelector((state) => state.restaurantData);
 
-debugger
     useEffect(() => {
         if ( _id) {  
+            console.log("Se vuelve a vonectar")
             conectarSocket();
          }  
     }, [  _id,conectarSocket ]);

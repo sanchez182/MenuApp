@@ -1,11 +1,11 @@
-//Components
 import { Toolbar, AppBar, Typography, Grid, List } from '@material-ui/core';
-//Language
-import { withTranslation } from 'react-i18next';
-import SpecialDialLenguage from '../../components/SpecialDialLenguage';
+import SpecialDialLenguage from '../SpecialDialLenguage';
+import { useSelector } from 'react-redux'; 
+import { RootState } from '../../store';
 
-//TODO agregar el nombre del restaurante en el header
-const StartAppBarPublic = (props) => {
+const StartAppBarPublic = () => {
+const { name } = useSelector((state: RootState) => state.restaurantData);
+
     return (
         <AppBar elevation={0} position='fixed' className={`appBar`}>
             <Toolbar>
@@ -13,7 +13,7 @@ const StartAppBarPublic = (props) => {
                     <Grid item xs={8} md={6} className="column-logo">
 
                         <Typography variant='h6' noWrap>
-                            Nombre de restaurante {/* {t('header.title')}  */}
+                                {name}
                         </Typography>
                     </Grid>
                     <Grid item xs={4} md={6} className="column-info">
@@ -27,4 +27,4 @@ const StartAppBarPublic = (props) => {
     );
 };
 
-export default withTranslation()(StartAppBarPublic);
+export default StartAppBarPublic;
