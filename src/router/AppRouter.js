@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { PublicRoute } from './PublicRoute';
-import MenuComponent from '../pages/menu/MenuComponent';
 import Page404 from '../pages/404';
 import Homepage from '../pages/menu/Homepage';
 import AlertComponent from '../components/AlertComponent';
@@ -21,12 +20,6 @@ export const AppRouter = () => {
         <>
             <AlertComponent />
             <Switch>
-                <PublicRoute
-                    exact
-                    path="/menu"
-                    component={MenuComponent}
-                />
-
                 <PublicRoute
                     exact
                     path="/tables"

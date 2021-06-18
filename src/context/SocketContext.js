@@ -1,47 +1,33 @@
-import React, {  useEffect } from 'react';
+import {  useEffect } from 'react';
 import { createContext } from 'react';
 import { useSelector } from 'react-redux';
 import { useSocket } from '../hooks/useSocket'  
+
 export const SocketContext = createContext();
-
-
 export const SocketProvider = ({ children }) => {
-
+    //TODO: sacar url de env variables
     const { socket, online, conectarSocket, desconectarSocket } = useSocket('http://localhost:4000');
-/*     const { uid } = useSelector(state => state.auth);
- */
-    useEffect(() => {
-      /*   if ( uid ) { */
-            conectarSocket();
-     /*    } */
-    }, [  conectarSocket ]);
+    const { _id } = useSelector((state) => state.restaurantData);
 
- /*    useEffect(() => {
-        if ( !uid ) {
+debugger
+    useEffect(() => {
+        if ( _id) {  
+            conectarSocket();
+         }  
+    }, [  _id,conectarSocket ]);
+
+  useEffect(() => {
+    if ( !_id) {  
             desconectarSocket();
         }
-    }, [ uid, desconectarSocket ]);
- */
+    }, [ _id, desconectarSocket ]);
 
     useEffect(() => {
-        
-        socket?.on( 'lista-usuarios', (usuarios) => {
-       /*      dispatch({
-                type: types.usuariosCargados,
-                payload: usuarios
-            }); */
-            console.log(usuarios)
-        })
-
-    }, [ socket ]);
-
-    useEffect(() => {
-        socket?.on('seleted-table', (mensaje) => {
-  debugger
-  console.log("mesa seleccionada" + " " + mensaje)
-        })
-
-    }, [ socket ]);
+        socket?.on('selected-table', (mensaje) => {
+            debugger
+            console.log("mesa seleccionada" + " " + mensaje)
+                    })
+    }, [_id, socket ]);
 
 
     return (

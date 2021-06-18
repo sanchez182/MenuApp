@@ -1,4 +1,4 @@
-import React, { useContext, useEffect }  from 'react';
+import React, { useContext, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -11,12 +11,14 @@ import LocalBarIcon from '@material-ui/icons/LocalBar';
 import MenuItems from './MenuItems';
 import ButtonDial from '../../components/ButtonDial';
 import SelectItem from '../../components/SelectItem';
-import { useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { IFoodType, IModelDrinks, IModelFood, ITimeFood } from '../../interfaces/IModelMenuItem';
 import { Grid } from '@material-ui/core';
 import { drinkTypeList, foodTypeList, timeFoodTypeList } from '../temporalData';
-import MultiSelect from '../../components/MultiSelect'; 
+import MultiSelect from '../../components/MultiSelect';
 import { SocketContext } from '../../context/SocketContext';
+
+//#region  styles
 interface TabPanelProps {
   children?: React.ReactNode;
   index: any;
@@ -49,25 +51,31 @@ function a11yProps(index: any) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
+//#endregion
 
-export default function MenuComponent() {
+
+interface IMenuProps  {
+  selectedTable: String
+}
+
+export default function MenuComponent({ selectedTable }: IMenuProps) {
   //TODO: por param llega el numero de mesa
   const { items } = useSelector((state: RootState) => state.menuItemReducer);
+  const { _id } = useSelector((state: RootState) => state.restaurantData);
   const [value, setValue] = React.useState(0);
   const [drinkType, setDrinkType] = React.useState(null);
   const [foodType, setFoodType] = React.useState<IFoodType[]>([]);
   const [foodTime, setFoodTime] = React.useState<ITimeFood[]>([]);
-  const { socket } = useContext( SocketContext );
- 
+  const { socket } = useContext(SocketContext);
+
   useEffect(() => {
     // TODO: emitir la mesa que se aparta para mostrarlo en el lado del administrador
-    socket.emit( 'seleted-table', {
-      tableNumer: 1, // aca cambiar por el numer de mesa seleccionada
-        idRestaurant: "60cac604d575df447881cbaf"
+    socket.emit('selected-table', {
+      tableNumer: selectedTable, // mesa seleccionada
+      idRestaurant: _id,
+      isSelected: true
     });
-
-    // TODO: hacer el dispatch de el mensaje... 
-  }, [socket])
+  }, [socket, selectedTable, _id])
 
   const setDrink = (event: any) => {
     setDrinkType(event.target.value)
@@ -133,8 +141,8 @@ export default function MenuComponent() {
   }
 
   return (
-    <div className={"imgFond"}>
-      <AppBar  position='fixed'>
+    <>
+      <AppBar position='fixed'>
         <Tabs centered value={value} onChange={handleChange} aria-label="simple tabs example">
 
           <Tab label="Platillos" icon={<LocalDiningIcon />} {...a11yProps(0)} />
@@ -143,23 +151,23 @@ export default function MenuComponent() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Grid container justify="flex-end" style={{marginTop: "48px"}}>
-          <div style={{backgroundColor: "white", width: "100%"}}>
-                <MultiSelect renderItems={foodTime}
-            items={timeFoodTypeList}
-            setItemValue={setTimeFood}
-            idItemType="idTimeFood"
-            itemName="timeFoodName"
-            placeHolder="Filtrar por tiempo de comida" />
+        <Grid container justify="flex-end" style={{ marginTop: "48px" }}>
+          <div style={{ backgroundColor: "white", width: "100%" }}>
+            <MultiSelect renderItems={foodTime}
+              items={timeFoodTypeList}
+              setItemValue={setTimeFood}
+              idItemType="idTimeFood"
+              itemName="timeFoodName"
+              placeHolder="Filtrar por tiempo de comida" />
 
-          <MultiSelect renderItems={foodType}
-            items={foodTypeList}
-            setItemValue={setFood}
-            idItemType="idFoodType"
-            itemName="foodName"
-            placeHolder="Filtrar por tipo de comida" />
+            <MultiSelect renderItems={foodType}
+              items={foodTypeList}
+              setItemValue={setFood}
+              idItemType="idFoodType"
+              itemName="foodName"
+              placeHolder="Filtrar por tipo de comida" />
           </div>
-      
+
 
           {renderFoodByFilters()}
         </Grid>
@@ -191,7 +199,7 @@ export default function MenuComponent() {
         Item Three
       </TabPanel>
       <ButtonDial />
-    </div>
+    </>
   );
 }
 

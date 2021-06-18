@@ -1,13 +1,15 @@
-export const GET_RESTAURANT_TABLE = 'GET_RESTAURANT_TABLE';
+export const SET_RESTAURANT_TABLE = 'SET_RESTAURANT_TABLE';
 export const CHECKING_TABLE_SELETED = 'CHECKING_TABLE_SELETED';
 
-
+export interface IModelTable {
+  tableNumer: Number,
+  selected: Boolean,
+  idRestaurant: String
+}
 
 
 export interface IModelRestaurantTable {
-  tableNumer: Number,
-  selected: Boolean,
-  idRestaurant: number
+ tables :IModelTable[]
 }
 
 interface SetTableAction {

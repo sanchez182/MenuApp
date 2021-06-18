@@ -1,9 +1,9 @@
-import { IRestaurantTables,CHECKING_TABLE_SELETED,GET_RESTAURANT_TABLE, IModelRestaurantTable } from './actionsInterfaces/IRestaurantTablesActions';
+import { IRestaurantTables,CHECKING_TABLE_SELETED,SET_RESTAURANT_TABLE, IModelRestaurantTable } from './actionsInterfaces/IRestaurantTablesActions';
 
 
-export const getRestaurantTables = (payload: IModelRestaurantTable): IRestaurantTables => {
+export const setRestaurantTables = (payload: IModelRestaurantTable): IRestaurantTables => {
   return {
-    type: GET_RESTAURANT_TABLE,
+    type: SET_RESTAURANT_TABLE,
     payload 
   }
 }

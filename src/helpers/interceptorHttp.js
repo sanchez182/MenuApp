@@ -1,7 +1,6 @@
 import axios from 'axios'; 
 import i18next from 'i18next';
-import store from '../store';
-import { checkingFinish } from '../store/actions/authActions';
+import store from '../store'; 
 import { setOpenMessageAlert } from '../store/actions/messageAlertActions';
 import { apiCallError, apiCallStart, apiCallSuccess } from '../store/actions/requestActions'; 
 
@@ -62,18 +61,9 @@ export const successHandler = (response) => {
     return response;
 };
 
-export const interceptorHttp = (processUrl, token) => {
+export const interceptorHttp = (processUrl) => {
     const content = 'application/json'
     let customHeaders = []
-    if (token) {
-        customHeaders = [
-            {
-                key: 'x-token',
-                value: token  //store.getState().userdata.token
-            }
-        ]
-    }
-
     const axiosInstance = axios.create({
         baseURL: processUrl,
         headers: {

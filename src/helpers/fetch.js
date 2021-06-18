@@ -18,11 +18,22 @@ const postRequest = (token,endpoint,data)=>{
         })
     })
 }
+const getRequest = (token,endpoint,data)=>{
+    return new Promise(async (resolve,reject)=>{
+        getHttp(token)
+        .get(`${endpoint}`,data)
+        .then(response=>{
+            resolve(response)
+        })
+        .catch((error)=>{
+            reject(error)
+        })
+    })
+} 
 
 const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
-    const url = `${ baseUrl }/${ endpoint }`;
-    if ( method === 'GET' ) {
-        return fetch( url );
+     if ( method === 'GET' ) {
+        return getRequest(false,endpoint, data)
     } else {
         return postRequest(false,endpoint,data)
     }
